@@ -1,6 +1,6 @@
 <?php
 
-
+echo 123;
 //Duong dan den thu muc chua ung dung
 defined('APPLICATION_PATH')
 	|| define('APPLICATION_PATH', 
