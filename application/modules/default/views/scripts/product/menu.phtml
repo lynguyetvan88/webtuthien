@@ -1,0 +1,65 @@
+
+<link href="<?= $this->baseUrl() ?>/template/sitemapstyler/sitemapstyler.css" rel="stylesheet" type="text/css" media="screen" />
+<script type="text/javascript" src="<?= $this->baseUrl() ?>/template/sitemapstyler/sitemapstyler.js"></script>
+
+<ul id="sitemap">
+			 <?php foreach ($this->list_menu as $value) { 
+                                    $menu_id=$value['id'];
+                                    $title=$value['title'];
+                                    $menu=$value['menu']; 
+                                    $url_=  khongdau($title);
+                          ?>
+    
+                        <li><a  href="<?= $this->baseUrl()."/danh-muc/".$url_."-$menu_id.html" ?>" title="<?= $value['title'] ?><"><?= $value['title'] ?></a>
+				<?php if(!empty($menu)){ ?>
+                                    <ul>
+					<?php foreach ($menu as $list_1){ 
+                                                $menu_id_1=$list_1['id'];
+                                                $title_1=$list_1['title'];
+                                                $menu_1=$list_1['menu']; 
+                                                $url_1=  khongdau($title_1);
+                                            
+                                            ?>
+                                        <li><a  href="<?= $this->baseUrl()."/danh-muc/".$url_1."-$menu_id_1.html" ?>" title="<?= $list_1['title'] ?><"><?= $list_1['title'] ?></a>
+						<?php if(!empty($menu_1)){ ?>
+                                                <ul>
+							<?php foreach ($menu_1 as $list_2){ 
+                                                                $menu_id_2=$list_2['id'];
+                                                                $title_2=$list_2['title'];    
+                                                                $menu_2=$list_2['menu'];  
+                                                                $url_2=  khongdau($title_2);
+
+                                                            ?>
+							<li>
+                                                        <a  href="<?= $this->baseUrl()."/danh-muc/".$url_2."-$menu_id_2.html" ?>" title="<?= $list_2['title'] ?><"><?= $list_2['title'] ?></a>
+                                                        <?php if(!empty($menu_2)){ ?>
+                                                            <ul>
+                                                                    <?php foreach ($menu_2 as $list_3){ 
+                                                                            $menu_id_3=$list_3['id'];
+                                                                            $title_3=$list_3['title'];    
+
+                                                                            $url_3=  khongdau($title_3);
+
+                                                                        ?>
+                                                                    <li>
+                                                                    <a  href="<?= $this->baseUrl()."/danh-muc/".$url_3."-$menu_id_3.html" ?>" title="<?= $list_3['title'] ?><"><?= $list_3['title'] ?></a>
+                                                                    </li>
+                                                                    <?php }?>
+                                                            </ul>
+                                                <?php } ?>
+                                                        </li>
+                                                        <?php }?>
+						</ul>
+                                                <?php } ?>
+					</li>
+                                        <?php } ?>
+
+				</ul>
+                                <?php }?>
+			</li>
+                         <?php }?>
+			
+			
+			
+		</ul>
+	

@@ -1,0 +1,50 @@
+<div id="content"> 
+    <!--Breadcrumb Part Start-->
+    <div class="breadcrumb"> <a href="<?= $this->baseUrl() ?>">Home</a> » <a href="<?= $this->baseUrl("/san-pham.html") ?>">Sản phẩm</a></div>
+   
+    <!--Breadcrumb Part End-->
+    
+    <div class="main_title"> <a style="color: #fff" href="#"> <h1><?= $this->books ?></h1></a></div>
+   
+    <div class="product-grid">
+         <?php
+foreach ($this->book as $val) {
+    $url = khongdau($val['title']);
+                    $id = ($val['id']);
+                     $images = $val['images'];
+                     $mask = APPLICATION_PATH . "/../Upload/$images";
+                    if (file_exists($mask)) {
+                        $images = $val['images'];
+                    } else {
+                        $images = "no-img.png";
+                    } 
+                    $price = number_format($val['price'], 0, ".", ".");
+    ?>
+        <div>
+            <div class="image"><a href="<?= $this->baseUrl("/") . $url . "-" . $id . ".html" ?>" title="<?= $val['title'] ?>">
+                    <img src="<?= $this->baseUrl() ?>/Upload/<?= $images ?>" alt="<?= $val['title'] ?>" class="img-responsive" />
+                </a>
+            </div>
+            <div class="name"><a href="<?= $this->baseUrl("/") . $url . "-" . $id . ".html" ?>" title="<?= $val['title'] ?>"><?= $val['title'] ?></a></div>
+            <span class="price-old"><?= number_format($val['price_root'], 0, ".", ".") ?> VNĐ</span>
+            <div class="price"> <?= !empty($val['price'])? "$price":"Liên Hệ" ?> VNĐ</div>
+            
+            
+        </div>
+        <?php  } ?>
+        
+    </div>
+    
+       
+
+</div>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,108 @@
+
+
+<script type="text/javascript" src="<?php echo $this->baseurl();  ?>/js/AJAX.js"></script>
+
+<div class="row-fluid sortable">
+<div class="box span12">
+    <div class="box-header well" data-original-title>
+        <h2><i class="icon-user"></i> Members</h2>
+        
+  </div>
+     <div class="box-content">
+         <?php 
+         foreach ($this->user as $value) {
+             $sex=$value['sex'];
+             
+             
+          ?>
+<form action="" method="post" enctype="multipart/form-data" name="tt_mh" id="tt_mh" onsubmit="return checkInput();" class="form-horizontal">
+    
+     <div class="control-group">
+                  <label class="control-label" for="typeahead">Tên đầy đủ </label>
+                  <div class="controls">
+                      <input name="full_name" type="text" class="span6 typeahead" id="full_name" value="<?= $value['full_name']; ?>" >
+                    <div class="warning" id="full_nameError">Vui lòng nhập tên của bạn</div>
+                 </div>
+    </div>
+    
+     
+    
+    
+    
+    
+    <div class="control-group">
+                  <label class="control-label" for="typeahead">Email </label>
+                  <div class="controls">
+                      <input name="email" type="text" class="span6 typeahead" id="email" value="<?= $value['email']; ?>"  data-provide="typeahead" placeholder="Email của bạn">
+                    <div class="warning" id="emailError">Vui lòng nhập đúng định dạng email của bạn</div>
+               
+                  </div>
+    </div>
+    
+    <div class="control-group">
+                  <label class="control-label" for="typeahead">Số ĐT </label>
+                  <div class="controls">
+                      <input name="phone" type="text" class="span6 typeahead" id="phone"  value="<?= $value['phone']; ?>" data-provide="typeahead"  placeholder="Số điện thoại của bạn" >
+                    <div class="warning" id="phoneError">Vui lòng nhập đúng định dạng của bạn</div>
+               
+                  </div>
+    </div>
+    
+    <div class="control-group">
+                  <label class="control-label" for="typeahead">Ngày sinh </label>
+                  <div class="controls">
+                      <input name="birth" type="text" class="span6 typeahead" id="birth" value="<?= $value['birth']; ?>" placeholder="Nhập ngày sinh của bạn"  >
+                    <label>Ví dụ: 10/11/1988</label>
+                     <div class="warning" id="birthError">Vui lòng nhập ngày sinh của bạn</div>
+               
+                  </div>
+    </div>
+    
+    <div class="control-group">
+            <label class="control-label">Giới tính</label>
+            <div class="controls">
+              <label class="radio">
+                    <input type="radio" name="sex" id="optionsRadios1" value="1" <?php if($sex==1){ echo "Checked";}?>>
+                    Nam &nbsp;&nbsp;&nbsp;
+              </label>
+             
+              <label class="radio">
+                    <input type="radio" name="sex" id="optionsRadios1" value="2" <?php if($sex==2){ echo "Checked";}?>>
+                   Nữ 
+              </label>
+                
+                 <label class="radio">
+                    <input type="radio" name="sex" id="optionsRadios1" value="3" <?php if($sex==3){ echo "Checked";}?>>
+                   Gay
+              </label>
+            </div>
+	</div>
+    
+    
+     
+    <div class="control-group">
+                  <label class="control-label" for="typeahead">Địa chỉ </label>
+                  <div class="controls">
+                      <input name="address" type="text" value="<?= $value['address']; ?>"  class="span6 typeahead" id="typeahead" placeholder="Nhập địa chỉ của bạn" >
+                    
+               
+                  </div>
+    </div>
+    
+       
+     
+    
+    
+       
+     
+        
+        <div class="form-actions">
+                  <button type="submit" class="btn btn-primary" id="SendMail">Update</button>
+                  <button type="reset" class="btn">Cancel</button>
+          </div>
+      
+    </form>
+         <?php } ?>
+     </div>
+</div></div>
+<div class="clear"></div>

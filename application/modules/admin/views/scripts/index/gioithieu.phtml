@@ -1,0 +1,55 @@
+ 
+
+<form action='' method='post' enctype='multipart/form-data' name='tt_mh' id='tt_mh'  onsubmit='return checkInput();'>
+          <table width='780' border='1' bordercolor='black' style='border-collapse:collapse'>
+            <tr>
+              <td width="162" height="40" valign="top"><div align="left"><strong>Giới thiệu trang chủ <?php //xuat_select("luan","suc"); ?></strong></div>                               </td>
+              <td width="644"><div id="div_vn_afc">
+                      
+						
+						 <script type="text/javascript">
+										var oFCKeditor = new FCKeditor('txt_noidung');
+										oFCKeditor.BasePath = "<?php echo $this->baseUrl(); ?>/fckeditor/";
+										oFCKeditor.Width	= 600 ;
+										oFCKeditor.Height	= 300 ;
+										oFCKeditor.Value="<?php echo '<b>thu cai coi</b>'; ?>";
+										oFCKeditor.Config["EnterMode"]		= "br" ;
+										oFCKeditor.Create();
+										document.getElementById('xEnter').value = "br" ;
+										//document.getElementById("noidung").value=jljl;
+									</script>
+                                                                        
+                                                                   
+                                                
+					</div>
+					  </td>
+            </tr>
+            
+           
+            <tr>
+              <td height="40" valign="top"><div align="left"><strong>Giới thiệu chính </strong></div>
+                  
+              </td>
+              <td>
+                  <div id="div_en_afc">
+                    <script type="text/javascript">
+                        var oFCKeditor = new FCKeditor('txt_noidung_en');
+                        oFCKeditor.BasePath = "<?php echo $this->baseUrl(); ?>/fckeditor/";
+                        oFCKeditor.Width	= 600 ;
+                        oFCKeditor.Height	= 300 ;
+                        oFCKeditor.Value="<?php echo '<b>thu cai coi</b>'; ?>";
+                        oFCKeditor.Config["EnterMode"]		= "br" ;
+                        oFCKeditor.Create();
+                        document.getElementById('xEnter').value = "br" ;
+                        //document.getElementById("noidung").value=jljl;
+                </script>
+                </div></td>
+            </tr>
+            <tr>
+              <td height="28"><div align="center"></div></td>
+              <td><div align="left">
+                  <input name="luu" type="submit" id="luu" value="Lưu lại" />
+              </div></td>
+            </tr>
+          </table>
+      </form>

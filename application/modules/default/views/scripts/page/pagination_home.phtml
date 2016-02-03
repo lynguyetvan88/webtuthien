@@ -1,0 +1,34 @@
+<?php if ($this->pageCount): ?>
+<?php if($this->pageCount!=1) {?>
+<div class="pagination pagination-centered" > 
+     <ul class="navi">
+         
+<?php 
+	if (isset($this->previous)){
+  		echo '<li><a href="'.$this->baseurl('home/'.$this->previous). '">  Previous</a> </li> ';
+	}
+	foreach ($this->pagesInRange as $page){
+	   if ($page != $this->current){
+	   		  echo '<li><a href="'.$this->baseurl('home/'.$page). '">  ' . $page . '</a> </li> ';
+                        
+	  }else{
+	  	echo "<li class=\"active\"><a>".$page . '</a></li> ';
+	  }
+   }
+	 if (isset($this->next)){
+		echo '<li><a href="'.$this->baseurl('home/'.$this->next). '" id="load_page"> Next </a></li>';
+  	 }
+  ?>
+     </ul>
+</div>
+<script>
+$(document).ready(function() {
+             $("#load_page").click(function() {
+       $('html, body').animate({scrollTop:1370},10000);
+    });
+            
+           
+        });
+</script>
+<?php } else {}?>
+<?php endif; ?>

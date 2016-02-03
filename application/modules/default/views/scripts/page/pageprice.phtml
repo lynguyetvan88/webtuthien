@@ -1,0 +1,69 @@
+	
+        <link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/template/css/style.css" />
+        	
+<?php 
+$page = new Default_Model_Page;
+foreach ($this->books as $val)
+{
+    $cat_page=$this->escape($val['cat_page']);
+    $title=$this->escape($val['title']);
+    $url_1=  khongdau($title);
+     Zend_Registry::set('titlepage', $url_1);
+?>
+<div class="clear_10"></div>
+<div class="ribbon">
+    <a href="#"><span><?php echo $title; ?></span></a>
+
+</div>
+
+<div class="sanpham" align="left">
+
+    
+  
+<div class="accordion">
+    <?php
+        foreach ($this->menu_price as $list)
+            {
+             // $price=$valll['price'];
+        //$giaban=number_format($price, 0 , '.', '.');
+            $id=$list['id'];
+            $ttk = $page->list_Page_2($id);
+            foreach ($ttk as $valll) {
+                
+              $price=$valll['price'];
+        $giaban=number_format($price, 0 , '.', '.');
+            ?>
+    <h3><?= $valll['title'] ?> <span style="text-align: right; float: right"><?= $giaban ?>   VND</span></h3>
+<div>
+<p>
+    <img src="<?= $this->baseUrl() ?>/Upload/<?= $valll['images'] ?>" alt="<?= $valll['title'] ?> " title="<?= $valll['title'] ?> " style="float: right; max-width: 300px;" />
+    <p><?= $valll['description'] ?></p>
+    <p><?= $valll['content'] ?> </p>
+</p>
+</div>
+
+<?php } }  ?>
+
+</div>
+      
+   <?php 
+ }  
+//print_r($this->booksss);
+   $id_page=$this->id;
+      Zend_Registry::set('idpage', $id_page);
+
+echo $this->paginationControl($this->booksss,  'Sliding', 'page/pagination.phtml');
+
+
+
+
+   
+   ?> 
+    
+    
+  
+    
+</div>
+
+
+<div style="clear:both; height:10px"></div>

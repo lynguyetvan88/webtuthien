@@ -1,0 +1,117 @@
+
+<?php
+$sys = new Default_Model_System();
+$list = $sys->list_menu_page();
+//var_dump($list); die;
+?>
+<div class="container">
+    <div class="row">
+        <div class="pull-right mt"></div>
+        <button class="animenu__toggle">             
+            <span class="animenu__toggle__bar"></span>
+            <span class="animenu__toggle__bar"></span>
+            <span class="animenu__toggle__bar"></span>
+
+        </button>
+        <div class="pull-right dm">DANH MỤC </div>
+
+
+        <ul class="animenu__nav pull-right">
+            <li class="search_mobile">
+
+                <img src="<?= $this->baseUrl() ?>/template/front-end/images/search_03.png" class="pull-right" id="btn_search_mobile" alt=""/>
+                <input type="text" class="pull-right col-xs-10" id="key_search_mobile" />
+            </li>
+            <li>
+                <a href="<?= $this->baseUrl() ?>" title="trang chủ">Trang chủ</a>
+
+            </li>
+            <?php
+            foreach ($list as $val) {
+                $menu_id = $this->escape($val['id']);
+                $parent = $val['parent'];
+                $cat_page = $this->escape($val['cat_page']);
+                $title = ($val['title']);
+                $url_1 = khongdau($title);
+                $link_page = $this->baseUrl() . "/pages/$url_1-$menu_id.html";
+                ?>
+                <li>
+                    <a href="<?= $link_page ?>"><?php echo $title; ?></a>
+                    <?php if (!empty($parent)) {
+                        ?>
+                        <ul class="animenu__nav__child">
+                            <?php
+                            foreach ($parent as $val) {
+                                $menu_id = $this->escape($val['id']);
+
+                                $cat_page = $this->escape($val['cat_page']);
+                                $title = ($val['title']);
+                                $url_1 = khongdau($title);
+                                $link_page = $this->baseUrl() . "/pages/$url_1-$menu_id.html";
+                                ?>
+                                <li> <a href="<?= $link_page ?>"><?php echo $title; ?></a></li>
+                            <?php } ?>
+
+                        </ul>
+                    <?php } ?>
+                </li>
+            <?php } ?>
+            <li>
+                <a href="<?= $this->baseUrl("/lien-he.html") ?>" title="trang chủ">Liên hệ</a>
+            </li>
+            <li class="search_desktop">
+                <input type="text" id="key_search" />
+                <img src="<?= $this->baseUrl() ?>/template/front-end/images/search_03.png" id="btn_search" alt=""/>
+            </li>
+
+            <li class="support_mobile">
+                <div class="title_sb"> Hổ trợ trực tuyến</div>
+                <?php
+                $sys = new Default_Model_System();
+                $page = new Default_Model_Page();
+                $page_ = $page->list_Page_1(125);
+                $list_support = $sys->list_support();
+                ?>
+                <div class="content_page support">
+                    <?php
+                    if (!empty($list_support)) {
+                        foreach ($list_support as $list) {
+                            $loai_nick = $list['loai_nick'];
+                            $tendaidien = $list['name'];
+                            $ten_nick = "$list[nickname]";
+                            $dt = "$list[hotline]";
+                            if ($loai_nick == "yahoo") {
+
+                                echo "<div class=\"text-center pull-right\"  style=\"padding-bottom:10px; padding-top:10px; padding-right:25px;  \" align=\"center\"> "
+                                . "<strong>$tendaidien</strong> "
+                                . "<a href=\"ymsgr:sendim?$ten_nick\">
+               
+<img src=\"http://opi.yahoo.com/online?u=$ten_nick&m=g&t=2&l=us\"  height=\"23\" border=\"0\" width=\"107\"  align=\"absmiddle\">
+                 </a>
+                </div>"
+                                . " <div class=\"clearfix\"></div>";
+                            } else {
+                                ?>
+                                <div class="text-center pull-right" style="padding-bottom: 10px;padding-right:25px;">
+
+
+                                    <strong> <?= $tendaidien ?></strong>
+                                    <a title="Talk with me via Skype " href="skype:<?= $ten_nick ?>?chat"><img  alt="Talk with me via Skype" src="<?= $this->baseUrl("/template/front-end/images/skype_03.png") ?>"></a>
+
+                                </div>
+                                <div class="clearfix"></div>
+                                <?php
+                            }
+                        }
+                    }
+                    ?>
+
+                    <div class="clearfix"></div>
+                    <?= $page_[0]['content'] ?>
+                </div>
+            </li>
+
+        </ul>
+        <img src="<?= $this->baseUrl() ?>/template/front-end/images/logo_03.png" id="logo" alt=""/>
+    </div>
+</div>

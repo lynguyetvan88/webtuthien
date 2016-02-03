@@ -1,0 +1,313 @@
+<style>td{text-align: left;}</style>
+<script type="text/javascript">
+ 
+		function lienket_menu_doc(value){
+			var link="<?php echo $this->baseUrl();?>/admin/product/listmenu/idmenu/" + value;
+			window.location=link;
+		}
+		
+		
+		</script>
+<?php $base=$this->baseUrl();  ?>
+                
+ <div>
+<ul class="breadcrumb">
+        <li>
+                <a href="<?php echo $this->baseUrl(); ?>/admin/index/">Trang chủ</a> <span class="divider">/</span>
+        </li>
+        <li>
+                <a href="<?php echo $this->baseUrl(); ?>/admin/product/addcategory/">Thêm danh mục gốc</a> <span class="divider">/</span>
+        </li>
+        <li>
+                <a href="<?php echo $this->baseUrl(); ?>/admin/product/listcategory/">Danh sách danh mục gốc</a> <span class="divider">/</span>
+        </li>
+         <li>
+                <a href="<?php echo $this->baseUrl(); ?>/admin/product/addmenu/">Thêm menu</a> <span class="divider">/</span>
+        </li>
+         <li>
+                <a href="<?php echo $this->baseUrl(); ?>/admin/product/listmenu//">Danh sách  menu</a><span class="divider">/</span>
+        </li>
+        
+         <li>
+                <a href="<?php echo $this->baseUrl(); ?>/admin/product/addproducts/idmenu/0">Thêm sản phẩm</a> <span class="divider">/</span>
+        </li>
+         <li>
+                <a href="<?php echo $this->baseUrl(); ?>/admin/product/listproducts/">Danh sách  sản phẩm</a>
+        </li>
+</ul>
+</div>
+ 
+<div class="row-fluid sortable">
+<div class="box span12">
+    <div class="box-header well" data-original-title>
+        <h2><i class="icon-user"></i> Members</h2>
+        <div class="box-icon">
+                <a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+                <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+        </div>
+  </div>
+     <div class="box-content">               
+<form action="" method="post" enctype="multipart/form-data" name="tt_mh" id="tt_mh"  class="form-horizontal">
+ <div class="control-group">
+        <label class="control-label" for="selectError">Chọn danh mục</label>
+        <div class="controls">
+          <select name="category_id" class="validate[required] text-input" onchange="lienket_menu_doc(this.value)">
+                      <option value="">------ Chọn danh mục ------</option>
+            <?php
+           
+            
+           $idmenu=$this->idmenu;
+           Zend_Registry::set('idmenu', $idmenu);
+          // static $idmenu;
+           foreach($this->bookss as $val)
+            {
+               
+                $id=$val['id'];
+                $title=$val['title'];
+                 if ($idmenu==$id){$sl="selected";}else{$sl="";}
+               
+	echo "<option value='$id' $sl>";
+				echo $title;
+			echo "</option>";
+            }
+            ?>
+                  </select>
+        </div>
+    </div>
+</form>
+<table class="table table-striped table-bordered bootstrap-datatable datatable">
+    
+        
+        
+    <tr>
+    
+     
+    <th>Tiêu đề</th>
+    <th>Vị trí</th>
+    <th>Hiển thị</th>
+    <th>Phân loại</th>
+     <th>Select</th>
+    <th >Xóa</th>
+    <th >Sửa</th>
+  </tr>
+    <?php
+	
+   
+
+    function hop_option_de_quy($id,$so)
+	{
+        $idmenu1= Zend_Registry::get('idmenu');
+        $view= new Zend_View();
+        $base= $view->baseUrl();
+            
+               $db1=Zend_Registry::get('connectDB'); 
+		$so++;
+		$kt="&nbsp;";
+		for($i=1;$i<=$so;$i++)
+		{
+			$kt=$kt."&raquo;&raquo;&raquo;";
+		}
+                if($idmenu1==NULL){$sql1 = "SELECT * FROM `menu` where parent_id ='$id' "; }     
+                else {$sql1 = "SELECT * FROM `menu` where parent_id ='$id' and category_id='$idmenu1' "; } 
+                 
+                $stml1= $db1->prepare($sql1);
+                $stml1->execute();
+		
+		 while ($result1=$stml1->fetch(PDO::FETCH_ASSOC)) {
+                     $id=$result1['id'];
+			 echo "<tr id=\"row_$id\">";
+                    
+                       
+			 if ($result1['active']==1){
+                             $ck='checked';
+                             }
+                             else {$ck='';}
+                             
+                              if ($result1['thuocloai']==1){
+                                 $pl='Chứa sản phẩm';
+                                 }
+                             else {$pl='Chứa nội dung';}
+                             
+                              $del1=$view->url(array('action'=>'deletemenu','id'=>$result1['id']));
+                              $edit1=$view->url(array('action'=>'editmenu','id'=>$result1['id']));  
+                               $update_active1=$view->url(array('action'=>'menuactive','id'=>$id,'active'=>0)); 
+                               $update_inactive1=$view->url(array('action'=>'menuactive','id'=>$id,'active'=>1));
+                            
+                               $status11=$result1['active'];
+                               if($status11==1){$tt_1="<a href=\"javascript:void(0)\" id='active_$id' class=\"label label-success\" >Active</a>  <a href=\"javascript:void(0)\" id='inactive_$id' class=\"label\" style='display:none'>Inactive</a>";}
+                                else {$tt_1="<a href=\"javascript:void(0)\" id='active_$id' class=\"label label-success\" style='display:none' >Active</a> <a href=\"javascript:void(0)\" id='inactive_$id' class=\"label\">Inactive</a>";}
+           
+			echo "<td >";echo $kt;echo $result1['title']; echo "</td>";
+                    
+			  echo "<td> $result1[position]</td>";
+                          echo "  <td id=\"demo_active_$id\">   $tt_1 </td>";
+                        echo "<td> $pl</td>";
+			echo " <td><input type='checkbox'  ></td>";
+                         echo "<td ><a href='#' class=\"btn btn-danger\" id=\"row_del_$id\"><i class=\"icon-trash icon-white\"></i></a></td>";
+                        echo "<td ><a href='$edit1' class=\"btn btn-info\"><i class=\"icon-edit icon-white\"></i> </a></td>";	
+			
+			
+				
+                    echo "</tr>";
+                    ?>
+                    <script>
+                    $( "#row_del_<?= $id ?>" ).live('click',function(event_ref) {  event_ref.preventDefault();
+                            if (confirm('Are you sure you wish to delete this record?')){
+                                 $.post('<?= $del1 ?>');
+                                 $( "#row_<?= $id ?>" ).hide(2000);
+                           }
+                     });
+
+                     $( "#active_<?= $id ?>" ).live('click',function() {  
+
+                             $.post('<?= $update_active1 ?>');
+
+                                $( "#demo_active_<?= $id ?>" ).empty();
+                                $( "#demo_active_<?= $id ?>" ).append( "<a href=\"javascript:void(0)\" id='inactive_<?= $id ?>' class=\"label\">Inactive</a>" );
+
+
+                     });
+
+                     $( "#inactive_<?= $id ?>" ).live('click',function() {  
+
+                             $.post('<?= $update_inactive1 ?>');
+
+                                $( "#demo_active_<?= $id ?>" ).empty();
+                                $( "#demo_active_<?= $id ?>" ).append( "<a href=\"javascript:void(0)\" id='active_<?= $id ?>' class=\"label label-success\">Active</a>" );
+
+                     });
+                 </script>
+                 <?php
+                   
+			hop_option_de_quy($result1['id'],$so);
+		}
+	}
+	
+
+            
+          
+                $db=Zend_Registry::get('connectDB'); 
+                 $idmenu= Zend_Registry::get('idmenu');
+                $sql = "SELECT * FROM `menu` where parent_id like '' order by id ASC ";
+                 if($idmenu==NULL){$sql = "SELECT * FROM `menu` where parent_id ='' order by id ASC"; }     
+                else {$sql = "SELECT * FROM `menu` where parent_id ='' and category_id='$idmenu' order by id ASC"; } 
+                $stml= $db->prepare($sql);
+                $stml->execute();
+		
+		
+		
+		while (  $result=$stml->fetch(PDO::FETCH_ASSOC)) 
+		{
+                    
+                    $id1=$result['id'];
+                    echo "<tr id=\"row_$id1\" >";
+                    
+                       
+			 if ($result['active']==1){
+                             $ck='checked';
+                             }
+                             else {$ck='';}
+                             
+                              if ($result['thuocloai']==1){
+                                 $pl='Chứa sản phẩm';
+                                 }
+                             else {$pl='Chứa nội dung';}
+                             $del=$this->url(array('action'=>'deletemenu','id'=>$result['id']));
+                             $edit=$this->url(array('action'=>'editmenu','id'=>$result['id']));
+                             $update_active=$this->url(array('action'=>'menuactive','id'=>$id1,'active'=>0));
+                             $update_inactive=$this->url(array('action'=>'menuactive','id'=>$id1,'active'=>1));
+                              $status=$result['active'];
+          if($status==1){$tt="<a href=\"javascript:void(0)\" id='active_$id1' class=\"label label-success\" >Active</a>  <a href=\"javascript:void(0)\" id='inactive_$id1' class=\"label\" style='display:none'>Inactive</a>";}
+          else {$tt="<a href=\"javascript:void(0)\" id='active_$id1' class=\"label label-success\" style='display:none' >Active</a> <a href=\"javascript:void(0)\" id='inactive_$id1' class=\"label\">Inactive</a>";}
+			echo "<td >";echo $result['title'];echo "</td>";
+                    
+			  echo "<td> $result[position]</td>";
+                          echo "<td id=\"demo_active_$id1\">$tt</td>";
+    echo "<td> $pl</td>";
+			echo " <td><input type='checkbox'  ></td>";
+    echo "<td ><a href='#' class=\"btn btn-danger\" id=\"row_del_$id1\"><i class=\"icon-trash icon-white\"></i></a></td>";
+    echo "<td ><a href='$edit' class=\"btn btn-info\"><i class=\"icon-edit icon-white\"></i> </a></td>";	
+			
+			
+				
+                    echo "</tr>";
+                    
+                    ?>
+                     <script>
+   $( "#row_del_<?= $id1 ?>" ).live('click',function(event_ref) {  event_ref.preventDefault();
+           if (confirm('Are you sure you wish to delete this record?')){
+                $.post('<?= $del ?>');
+                $( "#row_<?= $id1 ?>" ).hide(2000);
+          }
+    });
+    
+    $( "#active_<?= $id1 ?>" ).live('click',function() {  
+           
+            $.post('<?= $update_active ?>');
+               
+               $( "#demo_active_<?= $id1 ?>" ).empty();
+               $( "#demo_active_<?= $id1 ?>" ).append( "<a href=\"javascript:void(0)\" id='inactive_<?= $id1 ?>' class=\"label\">Inactive</a>" );
+              
+         
+    });
+    
+    $( "#inactive_<?= $id1 ?>" ).live('click',function() {  
+           
+            $.post('<?= $update_inactive ?>');
+               
+               $( "#demo_active_<?= $id1 ?>" ).empty();
+               $( "#demo_active_<?= $id1 ?>" ).append( "<a href=\"javascript:void(0)\" id='active_<?= $id1 ?>' class=\"label label-success\">Active</a>" );
+          
+    });
+</script>
+  
+  <?php
+	 hop_option_de_quy($result['id'],0);
+                }
+
+        
+?>
+  
+     
+  
+ 
+  <tr ><td colspan="8">
+          
+      <?php //if($idmenu==NULL){echo $this->paginationControl($this->books,  'Sliding', 'page/pagination.phtml');} ?>     
+      </td>
+  </tr>
+    
+</table>
+
+ </div> 
+        
+</div>
+</div>
+<div class="clear"></div>
+<div>
+<ul class="breadcrumb">
+        <li>
+                <a href="<?php echo $this->baseUrl(); ?>/admin/index/">Trang chủ</a> <span class="divider">/</span>
+        </li>
+        <li>
+                <a href="<?php echo $this->baseUrl(); ?>/admin/product/addcategory/">Thêm danh mục gốc</a> <span class="divider">/</span>
+        </li>
+        <li>
+                <a href="<?php echo $this->baseUrl(); ?>/admin/product/listcategory/">Danh sách danh mục gốc</a> <span class="divider">/</span>
+        </li>
+         <li>
+                <a href="<?php echo $this->baseUrl(); ?>/admin/product/addmenu/">Thêm menu</a> <span class="divider">/</span>
+        </li>
+         <li>
+                <a href="<?php echo $this->baseUrl(); ?>/admin/product/listmenu//">Danh sách  menu</a><span class="divider">/</span>
+        </li>
+        
+         <li>
+                <a href="<?php echo $this->baseUrl(); ?>/admin/product/addproducts/idmenu/0">Thêm sản phẩm</a> <span class="divider">/</span>
+        </li>
+         <li>
+                <a href="<?php echo $this->baseUrl(); ?>/admin/product/listproducts//">Danh sách  sản phẩm</a>
+        </li>
+</ul>
+</div>

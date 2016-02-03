@@ -1,0 +1,102 @@
+
+<?php 
+foreach ($this->books as $val)
+{
+    
+    $title_1=$this->escape($val['title']);
+    $menu_id = $this->escape($val['id']);
+    $cat_page = $this->escape($val['cat_page']);
+    $title = ($val['title']);
+    $url_1 = khongdau($title);
+    Zend_Registry::set('titlepage', $url_1);
+    $link_page = $this->baseUrl()."/pages/$url_1-$menu_id.html";
+?>
+
+<div class="title">
+    <a href="<?= $this->baseUrl() ?>">Trang chủ</a>» &nbsp; <a href="<?= $link_page ?>"> <?php echo $title_1; ?> </a> 
+		
+	 </div>        
+
+<div class="product-list">  
+
+            	<div class="col-md-12">
+                  
+    <?php 
+        foreach ($this->booksss as $valll)
+            {
+                $id=$valll["id"];
+                $description=$valll["description"];
+               
+               
+                $title=$valll["title"];
+                $url=  khongdau($title);
+                
+                $view=new Zend_View();
+                $base=$view->baseUrl();
+                $images="$base/Upload/".$valll["images"];
+               
+                $menu=$valll["menu"];
+                 $content=$valll["content"];
+                $link="$base/trang/$url-$id-$menu.html";
+                ?>
+                    <div class="post1">
+                        <h3><a href="<?= $link ?>" title="<?= $valll['title'] ?>"><?= $valll['title'] ?></a></h3>
+                        <p class="date"><?= date("d/m/Y h:i:s",$valll['date']) ?></p>
+                        <a href="<?= $link ?>" title="<?= $valll['title'] ?>"><img src="<?= $images ?>" class="img-responsive" alt="<?= $valll['title'] ?>"/></a>
+                        <p><?= $description ?></p>
+                          <p><?= $content ?></p>
+                    </div>
+                   <?php 
+                   
+             
+            }
+        ?>
+    
+    
+ <?php } ?>
+    
+                    
+      
+
+
+                  </div>
+    <div class="clearfix"></div>
+                </div>
+    
+    
+   
+
+   
+
+
+    <div class="title"> Tin Khác</div>
+  <div class="product-list other-page">
+      <div class="col-md-12 content_left">
+    <ul class="list-unstyled arrow">
+     <?php 
+        foreach ($this->bookk as $valll)
+            {
+                $id=$valll["id"];
+                
+               
+                $title=$valll["title"];
+                $url=  khongdau($title);
+                
+                $view=new Zend_View();
+                $base=$view->baseUrl();
+                $images="$base/Upload/".$valll["images"];
+                $images="<img src='$images' title='$title' alt='$title' >";
+                $menu=$valll["menu"];
+                 $date=$valll["date"];
+                 $link="$base/trang/$url-$id-$menu.html";
+                 $date = date("d/m/Y h:i:s",$date);
+                echo"<li style='line-height:30px'>  <i class=\"fa fa-circle \"></i>  <a href='$link' title='$title'>  $title <span>($date)</span> </a> </li>";
+        }
+        ?>
+    </ul>
+    
+</div>
+           
+      <div class="clearfix"></div>    
+</div>
+       

@@ -1,0 +1,334 @@
+
+
+<script type="text/javascript" src="<?php echo $this->baseurl();  ?>/template/fckeditor/fckeditor.js"></script>
+
+<script type="text/javascript" src="<?php echo $this->baseurl();  ?>/js/AJAX_2.js"></script>
+
+
+<div class="row-fluid sortable">
+<div class="box span12">
+    
+    <div class="box-header well" data-original-title>
+						<h2><i class="icon-user"></i> Members</h2>
+						
+  </div>
+    <div class="box-content">
+        
+        
+        <?php
+	
+            $idmenu=$this->menu_id;
+           Zend_Registry::set('idmenu', $idmenu);
+	function hop_option()
+	{
+            
+                 
+         
+                $idmenu1= Zend_Registry::get('idmenu');
+       
+                $db=Zend_Registry::get('connectDB');
+                $sql_m = "SELECT * FROM `products` where id  like '$idmenu1' ";
+                $stml_m= $db->prepare($sql_m);
+                $stml_m->execute();
+                $result_1=$stml_m->fetch(PDO::FETCH_ASSOC);
+                $menu_id=$result_1['menu_id'];
+                
+                
+                $sql_ca = "SELECT * FROM `menu` where id  like '$idmenu1' ";
+                $stml_ca= $db->prepare($sql_ca);
+                $stml_ca->execute();
+                $result_2=$stml_ca->fetch(PDO::FETCH_ASSOC);
+                $category_id	=$result_2['category_id'];
+                
+                
+                $sql = "SELECT * FROM `menu` where category_id	 like '$category_id'  and thuocloai like '1' ";
+                $stml= $db->prepare($sql);
+                $stml->execute();
+		
+		echo "<select name=\"parent_id\" class=\"validate[required] text-input\">";
+		echo "<option value=\"\">Cấp đầu</option>";
+		while ($result=$stml->fetch(PDO::FETCH_ASSOC)) 
+		{
+                    $id_mn=$result['id'];
+                    if ($idmenu1==$id_mn)
+                    {$sl="Selected";}
+                else {$sl="";}
+			echo "<option value=\"$result[id]\" $sl>";
+				echo $result['title'];
+			echo "</option>";
+			
+				hop_option_de_quy($result['id'],0);
+			
+		}
+		echo "</select>";
+	}
+function hop_option_de_quy($id,$so)
+	{
+            $idmenu= Zend_Registry::get('idmenu');
+            $db1=Zend_Registry::get('connectDB'); 
+		$so++;
+		$kt="";
+		for($i=1;$i<=$so;$i++)
+		{
+			$kt=$kt."&DoubleRightArrow;&DoubleRightArrow;&DoubleRightArrow;";
+		}
+                $sql_m1 = "SELECT * FROM `products` where id  like '$idmenu' ";
+                $stml_m1= $db1->prepare($sql_m1);
+                $stml_m1->execute();
+                $result_11=$stml_m1->fetch(PDO::FETCH_ASSOC);
+                $menu_id1=$result_11['menu_id'];
+                
+                $sql1 = "SELECT * FROM `menu` where parent_id ='$id' and  thuocloai like '1'";
+                $stml1= $db1->prepare($sql1);
+                $stml1->execute();
+		
+		 while ($result1=$stml1->fetch(PDO::FETCH_ASSOC)) {
+                     $id_mn1=$result1['id'];
+                    if ($idmenu==$id_mn1)
+                    {$sl1="Selected";}
+                    else {$sl1="";}
+			echo "<option value='$result1[id]' $sl1>";
+				echo $kt;
+				echo $result1['title'];
+			echo "</option>";
+			
+			
+			
+				hop_option_de_quy($result1['id'],$so);
+			
+		}
+	}
+       
+?>
+
+<?php
+foreach ($this->books as $val)
+{
+
+    $content = thay_the_fckeditor($val['content']);
+    $district_id=$val['district_id'];
+    ?>
+   
+  
+ 
+<h4>Để được đăng tin vip hiển thị trên trang chủ website chúng tôi. Xin vui lòng soạn <a href="javascrip:void(0)" style="color: #F00;">TINVIP ID gửi 6577 <br>(vd: TINVIP 1234 gửi 6577) </a>hoặc<a href="<?php echo $this->baseurl(); ?>/lien-he.html" title="liên hệ" style="color: #F00;"> liên hệ</a> với chúng tôi  vào số hotline : <a href="<?php echo $this->baseurl(); ?>/lien-he.html" title="liên hệ" style="color: #F00;">0974.547.155</a></h4>
+         <br>    
+<form action='' method='post' enctype='multipart/form-data' name='tt_mh' id='tt_mh' class="form-horizontal"  >
+    <input name="members" type="hidden" value=" <?php echo $this->username;    ?>" class="span6 typeahead" id="typeahead"  data-provide="typeahead" data-items="4">
+    <div class="control-group">
+        <label class="control-label" for="selectError">Chọn khu vực</label>
+        <div class="controls">
+            <select name="dictrict_id" id="dictrict_id" >
+                      <option value="0">------ Chọn khu vực ------</option>
+            <?php
+           
+            
+           
+           foreach($this->bokk as $val1)
+            {
+               
+                $id1=$val1['id'];
+                $title1=$val1['category'];
+                
+               if ($id1==$district_id){$sl_1="selected";}else{$sl_1="";}
+                        echo "<option value='$id1' $sl_1 >";
+				echo $title1;
+			echo "</option>";
+            }
+            ?>
+           </select>
+            <div class="warning" id="dictrict_idError">Vui lòng chọn khu vực đăng tin của bạn</div>
+        </div>
+    </div>
+    
+    <div class="control-group">
+        <label class="control-label" for="selectError">Chọn danh mục</label>
+        <div class="controls">
+          <select name="category_id" id='category_id'>
+                      <option value="">------ Chọn danh mục ------</option>
+            <?php
+           
+            
+           $idmenu=$this->menu_id;
+           Zend_Registry::set('idmenu', $idmenu);
+          // static $idmenu;
+           
+           
+           
+           foreach($this->book_s as $val_3)
+            {
+               
+                $category_id=$val_3['category_id'];
+                //$title_3=$val_3['title'];
+                 
+            }
+           
+           foreach($this->bookss as $val_2)
+            {
+               
+                $id_2=$val_2['id'];
+                $title_2=$val_2['title'];
+                 if ($category_id==$id_2){$sl_2="selected";}else{$sl_2="";}
+               
+                        echo "<option value='$id_2' $sl_2>";
+				echo $title_2;
+			echo "</option>";
+            }
+            ?>
+           </select>
+             <div class="warning" id="category_idError">Vui lòng chọn danh mục</div>
+        </div>
+    </div> 
+    <script>
+            $(document).ready(function(  ){
+                $("select option:selected").each(function () {
+                    $("div#div1").load("<?php echo $this->baseUrl(); ?>/default/register/menu?id=" + $(this).val());
+                });	
+            });
+	
+            $("select#category_id").change(function () {
+                var str = "";
+                $("select option:selected").each(function () {
+                    str += $(this).val() + " ";
+                });
+               // $("div#div2").text(str);
+            })
+            .change(function(  ){
+                $("div#div1").load("<?php echo $this->baseUrl(); ?>/default/register/menu?id=" + $(this).val());
+            });
+        </script>
+     <div class="control-group">
+        <label class="control-label" for="selectError">Chọn menu</label>
+        
+        
+        <div class="controls">
+          
+            <div id="div2" style="float: left;margin: 2px 10px 0px 0px">  <?php hop_option();?></div>
+        </div>
+    </div>
+    
+    <div class="control-group">
+                  <label class="control-label" for="typeahead">Tiêu đề </label>
+                  <div class="controls">
+                      <input name="title" value="<?php  echo $this->escape($val['title']); ?>" type="text" class="span6 typeahead" id="title"  placeholder="Nhập tiêu đề sản phẩm của bạn (*)"  data-provide="typeahead" data-items="4" data-source='["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]'>
+                    
+               
+                  </div>
+    </div>
+    
+    <div class="control-group">
+      <label class="control-label" for="fileInput">Hình ảnh</label>
+      <div class="controls">
+            <?php echo $this->formFile('images');?>
+          <div class="clear"></div>
+          <img src="<?php echo $this->baseUrl(); ?>/Upload/<?php  echo $this->escape($val['images']); ?>" width="190">
+          <input name="images_hiden" type="hidden" id="name"  size="70" class="text"  value="<?php  echo $this->escape($val['images']); ?>"/>
+      </div>
+    </div>
+    <div class="control-group">
+                  <label class="control-label" for="typeahead">Mô tả </label>
+                  <div class="controls">
+                   
+                     <textarea name="description" cols="70" rows="10" class="span6 typeahead" id="typeahead" ><?php  echo $this->escape($val['description']); ?></textarea>
+               
+                  </div>
+    </div>
+    
+    
+    <div class="control-group">
+                  <label class="control-label" for="typeahead">Giá bán (VNĐ) </label>
+                  <div class="controls">
+                      <input name="price" value="<?php  echo $this->escape($val['price']); ?>" type="text" class="span6 typeahead" id="typeahead"  data-provide="typeahead" data-items="4" data-source='["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]'>
+                    
+               
+                  </div>
+	</div>
+    
+    <div class="control-group">
+                  <label class="control-label" for="typeahead">Trạng thái </label>
+                  <div class="controls">
+                      <input name="state" type="text" value="<?php  echo $this->escape($val['state']); ?>" class="span6 typeahead" id="typeahead"  data-provide="typeahead" data-items="4" data-source='["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]'>
+                    
+               
+                  </div>
+	</div>
+    
+    <div class="control-group">
+                  <label class="control-label" for="typeahead">Xuất xứ </label>
+                  <div class="controls">
+                      <input name="made_in" value="<?php  echo $this->escape($val['made_in']); ?>" type="text" class="span6 typeahead" id="typeahead"  data-provide="typeahead" data-items="4" data-source='["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]'>
+                    
+               
+                  </div>
+	</div>
+    
+    <div class="control-group">
+                  <label class="control-label" for="typeahead">Khuyến mãi </label>
+                  <div class="controls">
+                      <input name="sales" value="<?php  echo $this->escape($val['sales']); ?>" type="text" class="span6 typeahead" id="typeahead"  data-provide="typeahead" data-items="4" data-source='["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]'>
+                    
+               
+                  </div>
+	</div>
+    
+    <div class="control-group">
+                  <label class="control-label" for="typeahead">Description </label>
+                  <div class="controls">
+                   
+                     <textarea name="dis" cols="70" rows="10" class="span6 typeahead" id="typeahead" ><?php  echo $this->escape($val['dis']); ?></textarea>
+               
+                  </div>
+	</div>
+            
+           
+           
+                     
+                     
+         <div class="control-group">
+                  <label class="control-label" for="typeahead">Keywords </label>
+                  <div class="controls">
+                   
+                     <textarea name="key" cols="70" rows="10" class="span6 typeahead" id="typeahead" ><?php  echo $this->escape($val['key']); ?></textarea>
+               
+                  </div>
+	</div>
+             
+      
+    
+    
+    
+    
+    
+        <div class="control-group" id="content">
+              <label class="control-label" for="textarea2">Nội dung</label>
+              <div class="controls">
+                    <div id="div_vn_afc">
+              <script type="text/javascript">
+                    var oFCKeditor = new FCKeditor('content');
+                     oFCKeditor.ToolbarSet	= 'Footer';
+                    oFCKeditor.BasePath = "<?php echo $this->baseUrl(); ?>/template/fckeditor/";
+                    oFCKeditor.Width	= 600 ;
+                    oFCKeditor.Height	= 300 ;
+                    oFCKeditor.Value="<?php echo $content; ?>";
+                    oFCKeditor.Config["EnterMode"]		= "br" ;
+                    oFCKeditor.Create();
+                    document.getElementById('xEnter').value = "br" ;
+                    //document.getElementById("noidung").value=jljl;
+            </script>
+            </div>
+              </div>
+	</div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="posting">Save changes</button>
+                  <button type="reset" class="btn">Cancel</button>
+          </div>
+          
+    
+      </form>
+         <h4>Để được đăng tin vip hiển thị trên trang chủ website chúng tôi. Xin vui lòng soạn <a href="javascrip:void(0)" style="color: #F00;">TINVIP ID gửi 6577 <br>(vd: TINVIP 1234 gửi 6577) </a>hoặc<a href="<?php echo $this->baseurl(); ?>/lien-he.html" title="liên hệ" style="color: #F00;"> liên hệ</a> với chúng tôi  vào số hotline : <a href="<?php echo $this->baseurl(); ?>/lien-he.html" title="liên hệ" style="color: #F00;">0974.547.155</a></h4>
+         <br>
+<?php
+    }
+?>
+    </div></div></div>
+<div class="clear"></div>

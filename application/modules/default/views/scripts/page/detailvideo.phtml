@@ -1,0 +1,62 @@
+
+<?php
+$list = $this->detail;
+$uri = khongdau($list[0]['title']);
+$id_video = $list[0]['video_id'];
+?>
+
+<div class="title">
+    <a href="<?= $this->baseUrl() ?>">Trang chủ</a> » &nbsp; <a href="<?= $this->baseUrl("/video.html") ?>"><?php echo "Video"; ?></a> » &nbsp; <a href="<?= $this->baseUrl("/videos/$uri-$id_video.html") ?>"> <?php echo $list[0]['title']; ?> </a> 
+
+</div>        
+
+<div class="product-list">  
+
+    <div class="col-md-12">
+        <iframe class="iframe" width="100%" height="80" src="<?php echo str_replace("watch?v=", "embed/", $list[0]['link']); ?>" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+        <div class="clearfix"></div>
+        <h4><a href="<?= $this->baseUrl("/videos/$uri-$id_video.html") ?>"><?php echo $list[0]['title']; ?></a></h4>
+        <p class="date"><?= date("d/m/Y h:i:s",$list[0]['create_date']) ?></p>
+    </div>
+    <div class="clearfix"></div>
+</div>
+
+
+<div class="title"> Video Khác</div>
+<div class="product-list other-page list_video">
+     <?php
+                    foreach ($this->other as $val) {
+                        $title = $val["title"];
+                       $url_1 = khongdau($title);
+                       $video_id = $val["video_id"];
+                        ?>
+                       
+                       
+                            <div class="col-xs-4 animation">
+                                <div class="pgl-property">
+                                    <div class="property-thumb-info">
+                                        <div class="property-thumb-info-image">
+                                             <a href="<?= $this->baseUrl("/videos/$url_1-$video_id.html") ?>">  
+                                            <img src="http://img.youtube.com/vi/<?php echo get_youtube_id($val['link']); ?>/hqdefault.jpg" class="img-responsive"/>
+                                            </a>
+
+                                        </div>
+                                        <div class="property-thumb-info-content">
+                                            <h4> <a href="<?= $this->baseUrl("/videos/$url_1-$video_id.html") ?>"> <?= $title ?></a></h4>
+                                         
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+      
+                            
+
+                            <?php
+                        }
+                    
+                    ?>
+                  
+
+    <div class="clearfix"></div>    
+</div>

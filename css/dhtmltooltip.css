@@ -1,0 +1,36 @@
+#dhtmltooltip
+{
+	border-right: black 1px solid;
+	padding-right: 4px;
+	padding-left: 4px;
+	border-top: black 1px solid;
+	font-size: 10pt;
+	left: -300px;
+	z-index: 100;
+	filter: alpha(opacity=90);
+	visibility: hidden;
+	padding-bottom: 4px;
+	border-left: black 1px solid;
+	padding-top: 4px;
+	border-bottom: black 1px solid;
+	font-family: Verdana;
+	position: absolute;
+	background-color: #fff;
+	width: 254px;
+}
+#dhtmltooltip div {
+	margin-bottom: 0px;
+	padding: 3px;
+	color: #8d5c4b;
+	font-family: arial ;
+	font-size: 12px;
+	font-weight: bold;
+	
+	}
+#dhtmlpointer
+{
+	z-index: 101;
+	left: -300px;
+	visibility: hidden;
+	position: absolute;
+}

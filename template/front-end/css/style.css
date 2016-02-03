@@ -1,0 +1,199 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Sep 25, 2015, 5:17:46 PM
+    Author     : LYANH77
+*/
+body{color: #000}
+header#header{background: url(../images/bg_banner_01.png) left top; height: 156px;  background-size: 100% 100% }
+header#header_mb{background: url(../images/bg_mobi_02.png) left top; height: 51px;  background-size: 100% 100% }
+.title .pull-right {text-transform: none}
+nav#nav{background: #7b0104 url(../images/nav_05.png) repeat-x  top; min-height: 34px; position: relative}
+nav#nav ul, ol{ margin-bottom: 0}
+section#menu_search {margin-top: 10px}
+section#menu_search ul li a {text-transform: uppercase; color: #380002}
+section#menu_search .list-inline > li {padding-left: 10px;   padding-right: 10px;}
+section#menu_search  #sb_search {background: #424a4d; color: #fff; border: 0; padding: 3px 10px;}
+#key_search {height: 27px; border: 0px; margin-left: 10px;margin-top: 6px;}
+#btn_search {height: 27px; margin-top: 6px; position: relative; right: 5px; cursor: pointer; border: 0px; float: right}
+header#welcome {background: url(../images/hear_marr_02.png) left top; height: 72px; line-height: 70px; color: #fff; font-size: 1.5em; background-size: cover }
+.title {background:   url(../images/bg_titile_03.png) left no-repeat, url(../images/bg_title_2_03.png) repeat-x ; height: 37px;
+        padding-left: 50px; text-align: left; line-height: 40px; font-size: 14px; font-weight: bold; text-transform: uppercase;
+        color: #fff; position: relative; z-index: 1;
+} 
+.title a {text-transform: none; color: #fff; padding-right: 10px}
+#logo {position: absolute; z-index: 1; top:-121px; height: 230px;}
+
+/*full width container*/
+
+section#content {margin-top: 10px}
+section#content .content_left {
+    padding: 0; padding-right: 15px;
+
+}
+section#content .content_left .page_main {margin-bottom: 20px}
+section#content .content_left .content_page{
+    border-left: 1px solid #ccc;
+    border-right:  1px solid #ccc;
+    border-bottom:  1px solid #ccc; padding: 10px 0px 10px 0px;
+
+}
+section#content .content_right .content_page{
+    border-left: 1px solid #ccc;
+    border-right:  1px solid #ccc;
+    border-bottom:  1px solid #ccc; padding: 10px 5px 10px 5px;
+    margin-bottom: 10px;
+
+}
+section#content .content_right .support strong{color: #666}
+section#content .content_left .product-list{
+    border-left: 1px solid #ccc;
+    border-right:  1px solid #ccc;
+    border-bottom:  1px solid #ccc; padding: 10px 5px 10px 5px;
+    margin-bottom: 10px;
+
+}
+section#content .content_left .product-list .grid_page{
+     border-bottom:  1px dotted #ccc; margin-bottom: 15px;
+}
+section#content .content_left .list_video .property-thumb-info-content{
+    min-height: 29px; margin-bottom: 15px;
+}
+section#content .content_left .iframe {height: 500px;}
+section#content .content_left .list_video .property-thumb-info-content h4 {font-size: 13px; font-weight: bold}
+section#content .content_left .list_video .property-thumb-info-content a{color: #cc0000}
+section#content .content_left .product-list  img {max-width: 100%}
+section#content .content_left .product-list .grid_page h4 {margin: 0; font-size: 14px; font-weight: bold}
+section#content .content_left .product-list  h3 {margin: 5px 0px 0px 0px; font-size: 18px; font-weight: bold}
+section#content .content_left .product-list  a {color:red;  }
+section#content .content_left .product-list .grid_page .list_l {margin: 0}
+section#content .content_left .product-list .grid_page .list_r{margin: 0; padding: 0}
+section#content .content_left .product-list  .date{margin-bottom: 0; color: #999}
+section#content .content_left .other-page a {color:#000;  }
+section#content .content_left .other-page .fa {color: #00ccff;
+    font-size: 6px;
+    position: relative;
+    top: -2px;}
+section#content .content_left .other-page span {color:#999; font-size: 12px;}
+section#content .content_left .content_page .title_page{
+    color: #cc0000; font-size: 16px; margin: 0; font-weight: bold;
+    
+}
+section#content .content_left .content_page  .img_page{
+    width: 238px; height: 160px; margin-right: 10px; 
+}
+section#content .content_left .content_page .date_page {
+    margin-top:-10px;
+}
+section#content .content_left .content_page .date_page span:first-child {color: #999}
+section#content .content_left .content_page .discription{text-align: justify; font-size: 14px}
+section#content .content_left .content_page .title_page:hover{color: #0000ff}
+
+section#content .content_left .content_page  .conten_list_page_1{border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-bottom: 7px}
+section#content .content_left .content_page  .conten_list_page_1:last-child{border-bottom: none}
+section#content .content_left .content_page  .conten_list_page_1 .img_page{
+    width: 100px; height: 80px; margin-right: 10px;  margin-bottom: 0;
+}
+section#content .content_left .content_page .conten_list_page_1 .title_page{
+    color: #000; font-size: 14px; margin: 0; 
+    
+}
+section#content .content_left .content_page .conten_list_page_1 .date_page {
+    margin-top:0px; padding-bottom: 15px
+}
+section#content .content_left .content_page .conten_list_page_1 .date_page span:first-child {color: #999}
+section#content .content_left .content_page .conten_list_page_1 .discription{text-align: justify; font-size: 14px}
+section#content .content_left .content_page .conten_list_page_1 .title_page:hover{color: #0000ff}
+section#content .content_right {
+    float: right; padding: 0;
+}
+section#content .content_right .qc img {width:100%; height: auto}
+section#content .content_right .video .title_video{color: #000;}
+section#content .content_right .video .title_video:hover {color: red}
+section#content .content_right .content_page  .conten_list_page_1 {border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-bottom: 7px}
+section#content .content_right .content_page  .conten_list_page_1:last-child {border: none}
+section#content .content_right .content_page  .conten_list_page_1 .img_page{
+    width: 100px; height: 80px; margin-right: 10px; margin-bottom: 0; 
+}
+section#content .content_right .content_page .conten_list_page_1 .title_page{
+    color: #000; font-size: 14px; margin: 0; 
+    
+}
+section#content .content_right .content_page .conten_list_page_1 .date_page {
+    margin-top:0px; padding-bottom: 15px; color:#999;font-size: 12px;
+}
+.date_page span{font-size: 12px;}
+
+footer#footer .foo_1 {
+    height: 12px; background: url(../images/bg_foo_1_02.png);
+}
+footer#footer .foo_2 {
+     background: url(../images/bg_foo_2_03.png); color:#fff;
+}
+footer#footer .foo_2 a {color: #fff}
+footer#footer .foo_2 .list-inline li{padding-right: 40px}
+footer#footer .foo_2 .list-inline li:last-child{padding-right: 0}
+footer#footer .foo_2 h3 {font-size: 18px}
+footer#footer .foo_3 {
+    min-height: 69px; background: #1e1d1d url(../images/bg_foo_3_03.png) repeat-x; color: #fff; padding-top: 20px;
+    text-align: center;
+}
+
+
+
+
+
+#this_year .thang td {
+    padding: 2px; border:1px solid #e1e2e3
+}
+#this_year .thang td.ngaytuan {padding: 6px 12px;color:#333}
+#this_year .ngaythang .t2t6, .t7, .cn{font-size: 12px; line-height:18px}
+#this_year .ngaytuan{font-size: 12px;}
+#this_year .ngaykhac{background: #E9E9E9;}
+#this_year .thang td.ngaytuan{background: #eaffef;}
+#this_year .other_content ul li a{padding: 5px 8px;}
+#this_year a.selected_cal{background: #666 !important; color: #FFF !important;}
+#this_year .hdcalendar{background:#599e1c; color:#FFF; height: 22px; font-size: 12px; font-weight: bold; text-align: center;}
+.tet {background-color:#FFCC99}
+.ngaythang .am {text-align:right;font-size:100%;line-height:100%;color:#777; font-size:12px}
+.ngaythang .am2 {text-align:right;font-size:100%;line-height:100%;color:#004080; cursor:pointer}
+.ngaythang .t2t6 {text-align:left;font-size:14px;color:#333}
+.ngaythang .t7 {text-align:left;font-size:14px;line-height:100%;color:green;}
+.ngaythang .cn {text-align:left;font-size:14px;line-height:100%;color:red;}
+.ngaythang .t2t6, .t7, .cn{font-weight:bold}
+td.t7{color:#FFFF00}
+td.cn{color:#CC0000}
+.fn {margin:0 !important}
+
+/* apple-middle */
+.vdigit-0,
+.vdigit-1,
+.vdigit-2,
+.vdigit-3,
+.vdigit-4,
+.vdigit-5,
+.vdigit-6,
+.vdigit-7,
+.vdigit-8,
+.vdigit-9{width:26px;height:51px;background:url(../images/apple-middle.png) no-repeat top left;text-indent:-999em;display:inline-block;}
+.vdigit-0{background-position:0 0;}
+.vdigit-1{background-position:-52px 0;}
+.vdigit-2{background-position:-104px 0;}
+.vdigit-3{background-position:-156px 0;}
+.vdigit-4{background-position:-208px 0;}
+.vdigit-5{background-position:-260px 0;}
+.vdigit-6{background-position:-312px 0;}
+.vdigit-7{background-position:-364px 0;}
+.vdigit-8{background-position:-416px 0;}
+.vdigit-9{background-position:-468px 0;}
+
+.count b {color:#7b0104}
+section#content .content_left .product-list a.pull-right{color:#337ab7}
+section#content .content_left .product-list .grid_page .list_l img {height: 120px; }
+.date{font-size: 12px}
+section#content .content_left  .pagination {float: right; margin: 0}
+section#content .content_right  .support img {width: 118px}
+.title a {text-transform: uppercase}

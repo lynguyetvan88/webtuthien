@@ -1,0 +1,148 @@
+
+			<!-- content starts -->		
+			<div>
+				<ul class="breadcrumb">
+					<li>
+						<a href="#">Home</a> <span class="divider">/</span>
+					</li>
+					<li>
+						<a href="#">Dashboard</a>
+					</li>
+				</ul>
+			</div>
+			<div class="sortable row-fluid">
+				<a data-rel="tooltip" title="6 new members." class="well span3 top-block" href="#">
+					<span class="icon32 icon-red icon-user"></span>
+					<div>Total Members</div>
+					<div>507</div>
+					<span class="notification">6</span>
+				</a>
+
+				<a data-rel="tooltip" title="4 new pro members." class="well span3 top-block" href="#">
+					<span class="icon32 icon-color icon-star-on"></span>
+					<div>Pro Members</div>
+					<div>228</div>
+					<span class="notification green">4</span>
+				</a>
+
+				<a data-rel="tooltip" title="$34 new sales." class="well span3 top-block" href="#">
+					<span class="icon32 icon-color icon-cart"></span>
+					<div>Sales</div>
+					<div>$13320</div>
+					<span class="notification yellow">$34</span>
+				</a>
+				
+				<a data-rel="tooltip" title="12 new messages." class="well span3 top-block" href="#">
+					<span class="icon32 icon-color icon-envelope-closed"></span>
+					<div>Messages</div>
+					<div>25</div>
+					<span class="notification red">12</span>
+				</a>
+			</div>
+			
+			<div class="row-fluid">
+				
+			</div>
+			<div class="row-fluid">
+				<div class="box span12">
+					<div class="box-header well">
+						<h2><i class="icon-info-sign"></i> Lời ngỏ</h2>
+						<div class="box-icon">
+							<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content">
+						
+                                                <p><b>Kính chào quý khách</b></p>
+						<p><b>Nếu gặp vấn đề khó khăn về phần quản trị ADMIN. Quí khách vui lòng gửi mail cho chúng tôi 
+                <strong style="color:#F00">lynguyetvan88@gmail.com</strong> để được sự hỗ trợ tốt nhất.</b></p>
+						
+						
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>		
+			<div class="row-fluid sortable">
+				<div class="box span4">
+					<div class="box-header well">
+						<h2><i class="icon-th"></i> Lịch vạn niên</h2>
+						
+					</div>
+					<div class="box-content" align="center">
+						<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="300" height="270" title="">
+                                <param name="movie" value="<?php echo $this->baseUrl(); ?>/flash/lich.swf">
+                                <param name="quality" value="high">
+                                <param name="wmode" value="transparent">
+                                <embed src="<?php echo $this->baseUrl(); ?>/flash/lich.swf" wmode="transparent" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="300" height="270">
+
+                                </object>
+					</div>
+				</div><!--/span-->
+						
+				<div class="box span4">
+					<div class="box-header well" data-original-title>
+						<h2><i class="icon-user"></i> Thời tiết, giá vàng, ngoại tệ</h2>
+						
+					</div>
+					<div class="box-content" align="center">
+						
+							<iframe frameborder="0" marginwidth="0" marginheight="0" src="http://muasamcangay.com/tool/weather/?size=130&fsize=12&bg=images/bg.png&repeat=repeat-x&r=1&w=1&g=1&d=0" width="300" height="270" scrolling="no"></iframe> 
+						
+					</div>
+				</div><!--/span-->
+						
+				<div class="box span4">
+					<div class="box-header well" data-original-title>
+						<h2><i class="icon-list-alt"></i> Hệ thống</h2>
+						
+					</div>
+					<div class="box-content">
+						
+							<table class="table">
+							     
+							   <tbody><tr style="background-color: rgb(226, 228, 255);">
+                                        <td  align="left">PHP Version :</td>
+                                        <td align="left">5.3</td>
+                                    </tr>
+                                    <tr style="background-color: rgb(239, 241, 241);">
+                                        <td align="left">MySQL Version :</td>
+                                        <td align="left">5.5.8</td>
+                                    </tr>
+                                    <tr style="background-color: rgb(226, 228, 255);">
+                                        <td align="left">Server Software :</td>
+                                        <td align="left">Apache</td>
+                                    </tr>
+                                    <tr style="background-color: rgb(239, 241, 241);">
+                                        <td align="left">Clien Browser :</td>
+                                        <td align="left"><script>document.write(navigator.appName);</script></td>
+                                    </tr>
+                                    <tr style="background-color: rgb(226, 228, 255);">
+                                        <td align="left">Cookies Enabled :</td>
+                                        <td align="left"><script>document.write(navigator.cookieEnabled);</script></td>
+                                    </tr>
+                                    <tr style="background-color: rgb(239, 241, 241);">
+                                        <td align="left">Platform :</td>
+                                        <td align="left"><script>document.write(navigator.platform);</script></td>
+                                    </tr>
+                                    
+                                    <tr style="background-color: rgb(226, 228, 255);">
+                                        <td align="left">IP Address :</td>
+                                        <td align="left">
+                                        <?php echo $_SERVER['REMOTE_ADDR']; ?>                                       </td>
+                                    </tr>
+                                     <tr style="background-color: rgb(239, 241, 241);">
+                                        <td align="left">IP Server :</td>
+                                        <td align="left">
+                                        <?php echo $_SERVER['SERVER_ADDR']; ?>                                       </td>
+                                    </tr>
+                                </tbody>
+						 </table>
+					</div>
+				</div><!--/span-->
+			</div><!--/row-->
+
+			
+
+		  

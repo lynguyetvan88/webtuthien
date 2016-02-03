@@ -1,0 +1,146 @@
+<?php
+$side = new Default_Model_Home();
+$list_side = $side->list_side();
+?>
+
+<div class="container">
+    <div class="row">
+        <div id="jslidernews3" class="lof-slidecontent hidden-xs  hidden-sm hidden-tablet" style="width:100%; height:450px;">
+            <div class="preload"><div></div></div>
+            <!-- MAIN CONTENT --> 
+            <div class="main-slider-content col-md-8" style=" height:400px; padding-left: 0; padding-right: 25px">
+                <div class="title">
+                    Ảnh tin mới
+                </div>
+                <ul class="sliders-wrap-inner">
+                    <?php
+                    if (!empty($list_side)) {
+                        foreach ($list_side as $list) {
+                            $uri = khongdau($list['title']);
+                            ?>
+                            <li>
+                                <img src="<?= $this->baseUrl("/Upload/") . $list['images'] ?>" title="<?= $list['title'] ?>" >           
+                                <div class="slider-description">
+                                    <div class="slider-meta"><a target="_parent" title="<?= $list['title'] ?>" href="<?= $this->baseUrl("/trang/$uri-$list[id]-$list[menu].html") ?>"><?= $list['title'] ?></a> </div>
+
+                                </div>
+                            </li> 
+                            <?php
+                        }
+                    }
+                    ?>
+
+                </ul>  	
+            </div>
+            <!-- END MAIN CONTENT --> 
+            <!-- NAVIGATOR -->
+            <div class="navigator-content pull-right" style="padding-right: 0; width: 400px">
+                <div class="navigator-wrapper">
+                    <div class="title">
+                        tin mới 
+                        <div  class="button-previous"><img src="<?= $this->baseUrl() ?>/template/front-end/images/right_03.png" alt=""/></div>
+
+
+                        <div class="button-next"> <img src="<?= $this->baseUrl() ?>/template/front-end/images/left_03.png" alt=""/> 
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <ul class="navigator-wrap-inner">
+                        <?php
+                        if (!empty($list_side)) {
+                            foreach ($list_side as $list) {
+                                $uri = khongdau($list['title']);
+                                ?>
+                                <li>
+                                    <div>
+                                        <img src="<?= $this->baseUrl("/Upload/") . $list['images'] ?>" title="<?= $list['title'] ?>" class="thumbnail pull-left" >   
+                                        <a target="_parent" title="<?= $list['title'] ?>" href="<?= $this->baseUrl("/trang/$uri-$list[id]-$list[menu].html") ?>">
+                                            <h2> <?= descr_excerpt($list['title'], 70) ?></h2>
+                                        </a>  
+                                        <p>
+                                            <?= descr_excerpt($list['description'], 80) ?>
+                                        </p>
+                                        <span class="date"><?= date("d/m/Y", $list['date']) ?> </span>
+                                        <a target="_parent" title="<?= $list['title'] ?>" href="<?= $this->baseUrl("/trang/$uri-$list[id]-$list[menu].html") ?>">
+                                            <span class="readmore"> > Xem tiếp </span>
+                                        </a>  
+
+
+
+
+                                    </div>    
+                                </li>
+
+                                <?php
+                            }
+                        }
+                        ?>
+
+                    </ul>
+                </div>
+<div class="button-control"><span></span></div>
+            </div> 
+            <!----------------- END OF NAVIGATOR --------------------->
+
+        </div> 
+
+        <section id="content" class="hidden-lg hidden-md">
+            <div class="content_left">
+                <div class="title">
+                    Tin mới
+                </div>
+                <div class="content_page">
+                    <div class="col-md-12 col-lg-12">
+                        <?php
+                        $stt = 0;
+                        if (!empty($list_side)) {
+                            foreach ($list_side as $val) {
+                                $uri = khongdau($val['title']);
+                                if ($stt == 0) {
+                                    ?>
+                                    <div class="conten_list_page">
+                                        <a target="_parent" title="<?= $val['title'] ?>" href="<?= $this->baseUrl("/trang/$uri-$val[id]-$val[menu].html") ?>"> 
+                                            <h2 class="title_page"> <?= $val['title'] ?></h2>
+                                        </a>   
+                                        <div class="clearfix"></div>
+                                        <img style="width: 100%; height: auto" src="<?= $this->baseUrl("/Upload/") . $val['images'] ?>" alt="<?= $val['title'] ?>" class="thumbnail pull-left img_page" >  
+
+                                        <p class="discription">
+                                            <?= descr_excerpt($val['description'], 360) ?>
+                                        </p>
+                                        <p class="date_page">
+                                            <span><?= date("d/m/Y h:i:s", $val['date']) ?></span>
+                                            <span class="text-right pull-right">  
+                                                <a target="_parent" title="<?= $val['title'] ?>" href="<?= $this->baseUrl("/trang/$uri-$val[id]-$val[menu].html") ?>">  > Xem tiếp  </a> 
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <hr/>
+                                <?php } else { ?>
+                                    <div class="conten_list_page_1 <?= ($stt>3)?"hidden-sm hidden-xs":"" ?>">
+                                        <img src="<?= $this->baseUrl("/Upload/") . $val['images'] ?>" alt="<?= $val['title'] ?>" class="thumbnail pull-left img_page"/>
+                                        <a target="_parent" title="<?= $val['title'] ?>" href="<?= $this->baseUrl("/trang/$uri-$val[id]-$val[menu].html") ?>">
+                                            <h2 class="title_page"> <?= descr_excerpt($val['title'], 70) ?></h2>
+                                        </a> 
+
+                                        <p class="date_page" style="padding-bottom: 0">
+                                            <span><?= date("d/m/Y h:i:s", $val['date']) ?></span>
+                                            <span class="text-right pull-right"> <a target="_parent" title="<?= $val['title'] ?>" href="<?= $this->baseUrl("/trang/$uri-$val[id]-$val[menu].html") ?>"> > Xem tiếp  </a> </span>
+                                        </p>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                <?php } $stt++;
+                            }
+                        }
+                        ?>
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

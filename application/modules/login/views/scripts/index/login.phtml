@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>Login</title>
+
+<link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->baseUrl(); ?>/hinh/chung.css">
+    
+</head>
+
+<body>
+    <center>
+    <?php
+$username = $this->formText('username', '', array('style' => 'width: 150px'));
+$password = $this->formPassword('password', '', array('style' => 'width: 150px'));
+$btnButton = $this->formSubmit('submit', 'Login');
+?>
+
+<form id="appForm" action="" method="POST" enctype="multipart/form-data">
+    <img src="<?php echo $this->baseUrl(); ?>/hinh/bt_ccc.gif" style="margin-top:30px;_margin-bottom:-4px">
+		<div class="lll_1" >
+			<div style="margin-left:10px">
+				<div style="height:25px;width:5px;overflow:hidden; padding-left:50px;" align="center"></div>
+                
+            <!-- <img src="hinh/logo_webshock.png" height="78" align="absmiddle" /> <span  style="font-size:14px; font-weight:bold"> VOVA TRADING AND SERVICE COMPANY LIMITED</span>
+                <br /><br />-->
+				<span class="g_1" > Login</span>
+                <hr  color="#0000FF"/>
+			  <div style="height:20px;width:5px;overflow:hidden"></div>
+				<table align="center">
+					<tr>
+						<td width="320px" valign="top"><img src="<?php echo $this->baseUrl(); ?>/hinh/bt_vvv.gif" style="_margin-bottom:-4px">
+							<div class="hjk_2">
+<table> 
+									<tr>
+										<td align="right" width="130px">
+											<span style="color:#666666;font-size:14px;font-weight:bold; "><BR />Username :</span>										</td>
+										<td>
+
+ <?php echo $username; ?>
+    
+                                                                                    
+                                                                                    
+   </tr>
+   <tr>
+<td align="right">
+        <span style="color:#666666;font-size:14px;font-weight:bold">
+                Password :</span>																					</td>
+<td> <?php echo $password; ?>
+    </td>
+</tr>
+<tr>
+ <td colspan="2" align="right">
+    <?php echo $btnButton; ?>
+ </td>
+</tr>
+ </table>
+ </div>
+ <img src="<?php echo $this->baseUrl(); ?>/hinh/bt_vvv_1.gif" style="_margin-top:-15px">
+     </td>
+				  </tr>
+				</table>
+		  </div>
+		</div>
+		<img src="<?php echo $this->baseUrl(); ?>/hinh/bt_ccc_1.gif" style="margin-bottom:135px;">
+</form>
+    </center>
+</body>
+</html>

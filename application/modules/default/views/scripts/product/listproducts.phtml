@@ -1,0 +1,76 @@
+
+
+
+
+
+
+
+    <div class="box-content">
+        
+        <form action="" method="post" enctype="multipart/form-data" name="tt_mh" id="tt_mh"  class="form-horizontal">
+ <div class="control-group">
+        <label class="control-label" for="selectError">Tìm kiếm</label>
+        <div class="controls">
+            <input name="title" type="text" class="span6 typeahead" id="typeahead"  data-provide="typeahead" data-items="4" style="float: left; margin-right: 10px; width: 250px" >
+            
+            
+            <?php 
+                echo "<select name=\"category_id\" id='category' class='form_tk' style=\"float: left;margin: 2px 10px 0px 0px\">";
+                echo "<option value=\"\">";
+				echo "------ Chọn danh mục gốc ------";
+			echo "</option>";
+            foreach($this->bookss as $val)
+            {
+                
+                $id=$val['id'];
+                $title=$val['title'];
+               
+	echo "<option value='$id' >";
+				echo $title;
+			echo "</option>";
+            }
+            ?>
+	</select>
+        <div id="div1" style="float: left; margin: 2px 10px 0px 0px">
+                <select name="">
+                    <option>--- Chọn menu ---</option>
+                </select>
+            </div>
+            <div id="div2" style="float: left;margin: 2px 10px 0px 0px"></div>
+            <button type="submit" class="btn btn-primary" style="margin-top: 2px">Search</button>
+        </div>
+    </div>
+            
+
+   
+                 
+               
+   
+</form>
+   <script>
+            $(document).ready(function(  ){
+                $("select option:selected").each(function () {
+                    $("div#div1").load("<?php echo $this->baseUrl(); ?>/default/register/menu?id=" + $(this).val());
+                });	
+            });
+	
+            $("select#category_id").change(function () {
+                var str = "";
+                $("select option:selected").each(function () {
+                    str += $(this).val() + " ";
+                });
+               // $("div#div2").text(str);
+            })
+            .change(function(  ){
+                $("div#div1").load("<?php echo $this->baseUrl(); ?>/default/register/menu?id=" + $(this).val());
+            });
+        </script>     
+
+
+
+         
+  
+        
+</div>
+
+<div class="clear"></div>

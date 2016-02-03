@@ -1,0 +1,51 @@
+/* 
+    Document   : css
+    Created on : Aug 3, 2012, 4:03:18 PM
+    Author     : ButChi
+    Description:
+        Purpose of the stylesheet follows.
+*/
+body{
+    background-color: #fff;
+}
+root { 
+    display: block;
+}
+.head{
+/*    background-image: url('images/banner.jpg');*/
+background: #0398CA;
+    margin-top: 10px;
+    text-align: center;
+    height:300px;
+    width: 1350px;
+}
+.body{
+    background-color: #cccccc;
+    height:800px;
+    width: 1350px;
+}
+.body_center{
+    background: content-box;
+    height:800px;
+    width: 600px;
+    margin-left: 300px;
+        
+}
+.body_left{
+/*    background-image: url('images/bg-left.jpg');*/
+background: burlywood;
+    height: 800px;
+    width: 300px;
+    float: left;
+}
+.body_right{
+/*    background-image: url('images/bg-left.jpg');*/
+background: #00ccff;
+    height: 800px;
+    width: 300px;
+    float:right;
+}
+
+    
+
+

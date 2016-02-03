@@ -1,0 +1,83 @@
+	
+       <div class="title"><a href="<?= $this->baseUrl() ?>">Trang chủ</a> » <a href="<?= $this->baseUrl() ?>"><?php echo "Kết quả tìm kiếm"; ?></a></div>
+
+
+       <div class="product-list">
+
+     
+    <?php
+   
+   
+        foreach ($this->booksss as $valll)
+            {
+            
+             
+              $address = $valll["address"];
+                        $id = $valll["id"];
+                        $description = $valll["description"];
+                        if (strlen($description) > 360) {
+
+                            $new_gioihan = strpos($description, " ", 360);
+                            $new_chuoi = substr($description, 0, $new_gioihan) . "...";
+                        } else {
+
+                            $new_chuoi = $description;
+                        }
+
+                        $title = $valll["title"];
+                        $url = khongdau($title);
+
+                        $view = new Zend_View();
+                        $base = $view->baseUrl();
+                        $images = $valll['images'];
+                        $mask = APPLICATION_PATH . "/../Upload/$images";
+                        if (file_exists($mask)) {
+                            $images = $valll['images'];
+                        } else {
+                            $images = "no-img.png";
+                        }
+                        $img = $base . "/Upload/" . $images;
+                        $menu = $valll["menu"];
+                        $link = "$base/trang/$url-$id-$menu.html";
+                ?>
+           <div class="grid_page">
+                                <div class="col-md-3 list_l">
+                                    <a href="<?= $link ?>">   <img alt="<?= $title ?>" src="<?= $img ?>" class="img-responsive pull-left thumbnail" > </a>
+                                </div>
+                                <div class="col-md-9 list_r">
+                                    <h4><a href="<?= $link ?>"><?= $title ?></a></h4>
+                                    <p class="date"><?= date("d/m/Y h:i:s",$valll['date']) ?></p>
+                                    <p>
+                                        <?= $description ?>
+
+                                    </p>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div> 
+      
+	
+             
+        
+    
+    
+				<!-- If browser does not support border radius, show this message -->
+				
+				
+                                
+                                
+                             
+  
+    
+    
+ <?php 
+ 
+    
+    }
+    ?>
+       
+                                
+
+                                <div class="clearfix"></div>
+    
+</div>
+

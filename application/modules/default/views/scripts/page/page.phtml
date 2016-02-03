@@ -1,0 +1,132 @@
+
+<?php
+$page = new Default_Model_Page;
+foreach ($this->books as $val) {
+    $menu_id = $this->escape($val['id']);
+    $cat_page = $this->escape($val['cat_page']);
+    $title = ($val['title']);
+    $url_1 = khongdau($title);
+    Zend_Registry::set('titlepage', $url_1);
+    $link_page = "/pages/$url_1-$menu_id.html";
+    ?>
+
+    <div class="title"><a href="<?= $this->baseUrl() ?>">Trang chủ</a> » <a href="<?= $this->baseUrl("$link_page") ?>"><?php echo $title; ?></a></div>
+
+
+
+    <div class="reservation_top"  <?php
+    if ($this->id == 116 || $this->id == 117 || $this->id == 118 || $this->id == 119) {
+        echo "style='background:none'";
+    }
+    ?>>
+        <div>          	 
+
+
+            <?php
+            if ($cat_page == 2) {
+                foreach ($this->bookss as $vall) {
+                    ?>         
+
+                    <div  > <?= $val['content'] ?>
+                    </div> 
+
+                    <?php
+                }
+            } else {
+                ?>
+                <div class="product-list">
+                    <?php
+                    foreach ($this->booksss as $valll) {
+                        $address = $valll["address"];
+                        $id = $valll["id"];
+                        $description = $valll["description"];
+                        if (strlen($description) > 360) {
+
+                            $new_gioihan = strpos($description, " ", 360);
+                            $new_chuoi = substr($description, 0, $new_gioihan) . "...";
+                        } else {
+
+                            $new_chuoi = $description;
+                        }
+
+                        $title = $valll["title"];
+                        $url = khongdau($title);
+
+                        $view = new Zend_View();
+                        $base = $view->baseUrl();
+                        $images = $valll['images'];
+                        $mask = APPLICATION_PATH . "/../Upload/$images";
+                        if (file_exists($mask)) {
+                            $images = $valll['images'];
+                        } else {
+                            $images = "no-img.png";
+                        }
+                        $img = $base . "/Upload/" . $images;
+                        $menu = $valll["menu"];
+                        $link = "$base/trang/$url-$id-$menu.html";
+                        ?>
+                        <?php
+                        if ($this->id == 116 || $this->id == 117 || $this->id == 118 || $this->id == 119) {
+                            ?>
+                            <div class="col-xs-4 animation">
+                                <div class="pgl-property">
+                                    <div class="property-thumb-info">
+                                        <div class="property-thumb-info-image">
+                                            <a href="<?= $link ?>">   <img alt="<?= $title ?>" src="<?= $img ?>" class="img-responsive" > </a>
+
+                                        </div>
+                                        <div class="property-thumb-info-content">
+                                            <h3><a href="<?= $link ?>"><?= $title ?></a></h3>
+                                            <?php if ($this->id != 119) { ?>  <address><?= $address ?></address> <?php } ?>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } else { ?>
+                            <div class="grid_page">
+                                <div class="col-md-3 col-sm-3 col-xs-3 list_l">
+                                    <a href="<?= $link ?>">   <img alt="<?= $title ?>" src="<?= $img ?>" class="img-responsive pull-left thumbnail" > </a>
+                                </div>
+                                <div class="col-md-9 col-sm-9 col-xs-8 list_r">
+                                    <h4><a href="<?= $link ?>"><?= $title ?></a></h4>
+                                    <p class="date"><?= date("d/m/Y h:i:s", $valll['date']) ?></p>
+                                    <p class="hidden-xs">
+                                        <?= $description ?>
+
+                                    </p>
+                                    <div class="clearfix"></div>
+                                    <a target="_parent" class="pull-right" title="video" href="<?= $link ?>">
+                                        <span class="readmore"> &gt; Xem thêm </span>
+                                    </a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div> 
+
+
+                            <?php
+                        }
+                    }
+                    ?>
+                </div>
+
+
+                <?php
+            }
+        }
+//print_r($this->booksss);
+        ?>
+        <div class="text-center">
+            <?php
+            echo "<div class=\"clearfix\"></div>  ";
+            $id_page = $this->id;
+            Zend_Registry::set('idpage', $id_page);
+            echo $this->paginationControl($this->booksss, 'Sliding', 'page/pagination.phtml');
+            ?> 
+
+        </div>
+        <div class="clearfix"></div>
+
+    </div>
+</div>
+

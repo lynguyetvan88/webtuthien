@@ -1,0 +1,30 @@
+<script src="<?= $this->baseUrl() ?>/template/front-end/js/jquery.marquee.min.js" type="text/javascript"></script>
+
+<?php
+$page = new Default_Model_Page();
+$adv = $page->list_Page_1(126);
+?>
+<header id="welcome">
+    <div class="container">
+        <div class="col-lg-2  hidden-md"> &nbsp;</div>
+        <div class="col-lg-10 col-md-12 marquee" style=" max-width: 800px;
+    overflow: hidden;"> 
+
+
+<?= $adv[0]['content'] ?>
+
+
+           
+        </div>
+
+    </div>
+
+</header>
+<script>
+   $(function () {
+    $('.marquee').marquee({
+        duration: 10000,
+        direction: 'left'
+    });
+});
+</script>

@@ -1,0 +1,92 @@
+<script>
+		jQuery(document).ready(function(){
+			// binds form submission and fields to the validation engine
+			jQuery("#formID").validationEngine();
+		});
+
+		/**
+		*
+		* @param {jqObject} the field where the validation applies
+		* @param {Array[String]} validation rules for this field
+		* @param {int} rule index
+		* @param {Map} form options
+		* @return an error string if validation failed
+		*/
+		function checkHELLO(field, rules, i, options){
+			if (field.val() != "HELLO") {
+				// this allows to use i18 for the error msgs
+				return options.allrules.validate2fields.alertText;
+			}
+		}
+	</script>
+    <style>#formID input,textarea{margin-bottom: 5px;
+background: #E1E1E1;
+min-height: 30px;
+width: 300px;
+font-size: 15px;}
+#formID  {font-weight:bold; }
+</style>
+
+<form action="" method="post" enctype="multipart/form-data" name="tt_mh" id="formID" class="formular"  onsubmit="return checkInput();">
+      <table width="100%" border="1" bordercolor="black" style="border-collapse:collapse; border-color:#FF0000">
+       
+         
+      
+        <tr>
+          <td><div align="left"><strong>Họ tên</strong></div></td>
+          <td><div align="left">
+            <label>
+              <input name="hoten" type="text" id="tieude2" class="validate[required] text-input"  size="70"   maxlength="70"/>
+             
+            </label>
+          </div></td>
+        </tr>
+        
+         
+         <tr>
+              <td height="22" valign="top">Địa chỉ</td>
+              <td>
+                      <textarea name="diachi" cols="70" rows="5" id="dis" class="validate[required] text-input"  ></textarea>
+                     
+              </td>
+         </tr>
+         <tr>
+          <td><div align="left"><strong>Điện thoại </strong> </div></td>
+          <td><div align="left">
+            <label>
+                <input name="dt" id="name" class="validate[required] text-input"  type="text" size="90"  maxlength="70"/>
+            </label>
+          </div></td>
+        </tr>
+        
+         <tr>
+          <td><div align="left"><strong>Email </strong> </div></td>
+          <td><div align="left">
+            <label>
+                <input name="email" id="name" cclass="validate[required] text-input"type="text" size="90"  maxlength="70"/>
+            </label>
+          </div></td>
+        </tr>
+        
+        
+         
+        
+        
+         <tr>
+              <td height="22" valign="top">Nội dung</td>
+              <td>
+                      <textarea name="noidung" cols="70" rows="10" id="dis" class="validate[required] text-input"></textarea>
+                     
+              </td>
+         </tr>
+       
+        <tr>
+          <td>
+            <div align="right"></div></td>
+          <td>
+            <div align="left">
+              <input name="luu" type="submit" id="luu" value="Lưu Lại" />
+            </div></td>
+        </tr>
+      </table>
+    </form>

@@ -1,0 +1,230 @@
+body
+{
+	margin:0 auto;
+	padding:0;
+}
+form
+{
+	margin:0;
+	padding:0
+}
+a
+{
+	text-decoration: none;
+	outline:0
+}
+img
+{
+	border:0px solid #999999;
+}
+textarea
+{
+	border:1px solid #999999
+}
+input
+{
+	border:1px solid #999999;
+}
+div.cao_3_px
+{
+	height:3px;
+	width:5px;
+	overflow:hidden;
+	border:0px solid #999999;
+}
+select
+{
+	border:1px solid #999999;
+}
+
+div.khung_abc__td
+{
+	width:170px;
+	height:27px;
+	/*border:1px solid #999999;*/
+	background-image:url('../hinhanh_flash/dungchung/2.png');
+}
+div.khung_abc__td span
+{
+	color:white;
+	font-size:18px;
+	line-height:27px;
+	margin-left:25px;
+	cursor:default;
+}
+div.khung_abc__nd
+{
+	width:168px;
+	border:1px solid #999999;
+	border-top:0px solid #999999;
+	background:#ececec;
+}
+
+div.spm img
+{
+	width:90px;
+	height:102px;
+	border:0px solid #999999;
+}
+div.spm a
+{
+	color:#000000;
+	width:120px;
+	display:inline-block;
+	font-size:14px;
+}
+div.spm span
+{
+	font-weight:bold;
+	color:#a42e2e;
+	font-size:14px;
+}
+div.spm div.o
+{
+	width:150px;
+	border:1px solid #999999;
+}
+
+div.div_ge_td
+{
+	background:#676767;
+	border:1px solid #999999;
+	height:27px;
+	width:638px;
+	margin-left:5px
+}
+div.div_ge_td a
+{
+	color:white;
+	font-weight:bold;
+	margin-left:5px;
+	line-height:27px;
+}
+div.div_ge_nd
+{
+	background:#ececec;
+	border:1px solid #999999;
+	width:638px;
+	margin-left:5px
+}
+table.dan_san_pham
+{
+	font-size:14px
+}
+table.dan_san_pham td
+{
+	width:212px;
+	text-align:center;
+	vertical-align:text-top;
+}
+table.dan_san_pham div
+{
+	width:205px;
+	border:1px solid #999999;
+}
+table.dan_san_pham span
+{
+	font-weight:bold;
+	color:#a42e2e;
+}
+table.dan_san_pham td a.td
+{
+	display:inline-block;
+	width:170px;
+	color:blue;
+}
+table.dan_san_pham td a.td:hover
+{
+	color:red
+}
+table.dan_san_pham td img
+{
+	width:150px;
+	height:170px;
+	margin-top:3px;
+}
+
+a.link_1:link { text-decoration: none;  color: black; font-weight: bold}
+a.link_1:visited { color: black; text-decoration: none; font-weight: bold}
+a.link_1:hover { text-decoration: underline; color:#a70001; font-weight: bold; font-style: normal; }
+div.thong_ke
+{
+	margin-left:10px
+}
+span.span__1
+{
+	font-size:14px;
+	color:#4362d3;
+	font-weight:bold
+}
+span.span__2
+{
+	font-size:14px;
+	color:red;
+	font-weight:bold
+}
+
+table.table__abc
+{
+	border:1px solid #cccccc;
+	border-collapse: collapse;
+	cursor:default;
+}
+table.table__abc td
+{
+	/*vertical-align:top;*/
+	border:1px solid #cccccc;
+	background:#f9f9f9;
+}
+
+table.table__abc tr td.table__abc___tr_td__dau
+{
+	background:#f0f0f0;
+	font-weight:bold;
+	color:#0b55c4
+}
+#table__abc___tr_td
+{
+	background:#white;
+}
+#table__abc___tr_td_hover
+{
+	background:#ffffdd;
+}
+div.lll_1
+{
+        text-align:left;
+        width:498px;
+        border:1px solid #cccccc;
+        border-top:0px solid #cccccc;
+        border-bottom:0px solid #cccccc;
+}
+div.lll_1 span.g_1
+{
+        color:#0b55c4;
+        font-weight:bold;
+        font-size:22px;
+        text-align:center;
+        padding-left:200px;
+}
+a.g_89
+{
+        color:#0b55c4;
+        font-size:13px
+}
+a.g_89:hover
+{
+        text-decoration: underline;
+}
+div.hjk_2
+{
+        border:1px solid #cccccc;
+        border-top:0px solid #cccccc;
+        border-bottom:0px solid #cccccc;
+        width:308px;
+
+}
+div.hjk_2 input
+{
+        margin-top:10px
+}

@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8">   
+        <?php echo $this->meta(); ?>
+        <?php
+        //echo $this->headTitle();
+        // echo $this->headScript();
+        // echo $this->doctype();
+        //echo $this->;
+        // echo $this->serverUrl();
+        // echo $this->url(array('view'=>'change'));
+        ?>
+        <?= $this->headLink(); ?>
+        <meta name="ROBOTS" content="noodp, INDEX, FOLLOW">
+        <meta name="revisit-after" content="1 days">
+
+        <meta name="geo.region" content="VN-SG" />
+        <meta name="geo.placename" content="Hồ Chí Minh, Hồ Chí Minh, Việt Nam" />
+        <meta name="geo.position" content="10.831317;106.668928" />
+        <meta name="ICBM" content="10.831317, 106.668928" />        
+        <META HTTP-EQUIV="refresh" CONTENT="600">
+        <link rel="alternate" href="<?php echo $this->baseUrl() ?>" hreflang="vi-vn" />
+
+        <link rel="SHORTCUT ICON" href="<?= $this->baseUrl() ?>/template/images/shortcut.png" type="image/x-icon" />   
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link href="<?= $this->baseUrl() ?>/template/front-end/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="<?= $this->baseUrl() ?>/template/front-end/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="<?= $this->baseUrl() ?>/template/front-end/menu/css/style.css" rel="stylesheet" type="text/css"/>
+        <script src="<?= $this->baseUrl() ?>/template/front-end/menu/js/prefixfree.min.js" type="text/javascript"></script>
+        <link href="<?= $this->baseUrl() ?>/template/front-end/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="<?= $this->baseUrl() ?>/template/front-end/css/mobile.css" rel="stylesheet" type="text/css"/>
+        <!--  silder -->
+
+
+        <link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/template/front-end/lib/slider/css/layout-rtl.css" />
+        <link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/template/front-end/lib/slider/css/style3.css" />
+        <link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/template/front-end/lib/slider/css/style3-rtl.css" />
+        <script language="javascript" type="text/javascript" src="<?= $this->baseUrl() ?>/template/front-end/lib/slider/js/jquery.js"></script>
+        <script language="javascript" type="text/javascript" src="<?= $this->baseUrl() ?>/template/front-end/lib/slider/js/jquery.easing.js"></script>
+        <script language="javascript" type="text/javascript" src="<?= $this->baseUrl() ?>/template/front-end/lib/slider/js/script.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var wth = 400;
+                if ($(window).width() <= 1024) {
+                    wth = 345;
+                }
+                //alert($(window).width());
+                var buttons = {previous: $('#jslidernews3 .button-previous'),
+                    next: $('#jslidernews3 .button-next')};
+                $('#jslidernews3').lofJSidernews({interval: 5000,
+                    easing: 'easeInOutQuad',
+                    duration: 1200,
+                    auto: true,
+                    mainWidth: 980,
+                    mainHeight: 300,
+                    navigatorHeight: 100,
+                    navigatorWidth: wth,
+                    maxItemDisplay: 4,
+                    buttons: buttons
+                    , rtl: true});
+            });
+
+        </script>
+       <style>
+	
+	ul.lof-main-wapper li {
+		position:relative;	
+	}
+</style>
+        <!--  silder -->
+        <!-- JS Part End-->
+    </head>
+    <body>
+
+        <?= $this->render("layout/header.phtml") ?>
+        <nav id="nav" class="animenu">
+            <?= $this->render("layout/menu.phtml") ?>
+        </nav>
+
+        <?= $this->render("layout/menu_search.phtml") ?>
+
+        <?php
+        $controller = Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
+        $action = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
+        if ($controller == "index" && $action == "index") {
+            ?>
+            <section class="block">
+                <?= $this->render("layout/slider.phtml") ?>
+            </section>
+        <?php } ?>
+        <section id="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9 col-md-9 content_left">
+                        <?= $this->layout()->content ?>
+                    </div>
+                    <div class="col-lg-3 col-md-3  content_right">
+                        <?= $this->render("layout/right.phtml") ?>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <footer id="footer">
+            <?= $this->render("layout/footer.phtml") ?>
+        </footer>
+
+        <script src="<?= $this->baseUrl() ?>/template/front-end/js/bootstrap.js" type="text/javascript"></script>
+        <script src="<?= $this->baseUrl() ?>/template/front-end/menu/js/index.js" type="text/javascript"></script>
+        <script src="<?= $this->baseUrl() ?>/template/front-end/js/main.js" type="text/javascript"></script>
+        <script>
+            $("#btn_search").click(function () {
+                var key = $("#key_search").val();
+                if (key == "")
+                {
+                    alert("Vui lòng nhập từ khóa cần tìm");
+                    return false;
+                }
+                $("section#content .content_left").load("<?= $this->baseUrl("default/page/search") ?>", {key: key});
+                $('html, body').animate({
+                    scrollTop: $("section#content").offset().top
+                }, 2000);
+                return false;
+            });
+
+            $("#btn_search_mobile").click(function () {
+                var key = $("#key_search_mobile").val();
+                if (key == "")
+                {
+                    alert("Vui lòng nhập từ khóa cần tìm");
+                    return false;
+                }
+                $("section#content .content_left").load("<?= $this->baseUrl("default/page/search") ?>", {key: key});
+                $('html, body').animate({
+                    scrollTop: $("section#content").offset().top
+                }, 2000);
+                return false;
+            });
+            
+            
+            
+        </script>
+    </body>
+
+</html>

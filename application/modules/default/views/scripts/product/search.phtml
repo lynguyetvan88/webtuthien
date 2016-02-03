@@ -1,0 +1,37 @@
+
+    <!--Breadcrumb Part Start-->
+    <div class="breadcrumb"> <a href="<?= $this->baseUrl() ?>">Trang  chủ</a> » <a href="#">Kết quả tìm kiếm</a></div>
+   
+    <!--Breadcrumb Part End-->
+
+    
+   
+    <div class="product-grid">
+          <?php
+                foreach ($this->book as $val) {
+                    $url = khongdau($val['title']);
+                    $id = ($val['id']);
+                     $images = $val['images'];
+                     $mask = APPLICATION_PATH . "/../Upload/$images";
+                    if (file_exists($mask)) {
+                        $images = $val['images'];
+                    } else {
+                        $images = "no-img.png";
+                    }
+                     $price = number_format($val['price'], 0, ".", ".");
+                    ?>
+        <div>
+            <div class="image"><a href="<?= $this->baseUrl("/") . $url . "-" . $id . ".html" ?>" title="<?= $val['title'] ?>">
+                    <img src="<?= $this->baseUrl() ?>/Upload/<?= $images ?>" alt="<?= $val['title'] ?>" class="img-responsive" />
+                </a>
+            </div>
+            <div class="name"><a href="<?= $this->baseUrl("/") . $url . "-" . $id . ".html" ?>" title="<?= $val['title'] ?>"><?= $val['title'] ?></a></div>
+            <div class="price">  <?= !empty($val['price'])? $price. " VNĐ" :"Liên Hệ" ?> </div>
+            
+            
+        </div>
+        <?php  } ?>
+        
+    </div>
+    
+        

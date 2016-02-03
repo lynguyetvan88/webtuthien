@@ -1,0 +1,69 @@
+<?php if (!empty($this->list)) {
+     foreach ($this->list as $list) {
+        $link_add_page = $this->baseUrl("/pages/").khongdau($list['title'])."-".$list["id"].".html"; 
+ ?>
+<div class="page_main">
+    <div class="title">
+        <?= $list['title'] ?> <a href="<?= $link_add_page ?>" title="<?= $list['title'] ?>" class="pull-right"> Xem tiếp &Gt; </a>
+    </div>
+    <div class="content_page">
+        <div class="col-md-8 col-lg-8 hidden-sm hidden-xs">
+            <?php 
+           
+            if(!empty($list['page'])){
+                foreach ($list['page'] as $val){
+                     $uri = khongdau($val['title']);
+                ?>
+            <div class="conten_list_page">
+               <a target="_parent" title="<?= $val['title'] ?>" href="<?= $this->baseUrl("/trang/$uri-$val[id]-$val[menu].html") ?>"> 
+                    <h2 class="title_page"> <?= $val['title'] ?></h2>
+                </a>   
+                <div class="clearfix"></div>
+                 <img src="<?= $this->baseUrl("/Upload/") . $val['images'] ?>" alt="<?= $val['title'] ?>" class="thumbnail pull-left img_page" >  
+               
+                <p class="discription">
+                   <?= descr_excerpt($val['description'], 360)  ?>
+                </p>
+                <p class="date_page">
+                    <span><?= date("d/m/Y h:i:s",$val['date']) ?></span>
+                    <span class="text-right pull-right">  
+                        <a target="_parent" title="<?= $val['title'] ?>" href="<?= $this->baseUrl("/trang/$uri-$val[id]-$val[menu].html") ?>">  > Xem tiếp  </a> 
+                    </span>
+                </p>
+            </div>
+            <div class="clearfix"></div>
+            <?php  } } ?>
+        
+
+        </div>
+
+        <div class="col-md-4 col-lg-4">
+            
+             <?php 
+           $stt=0;
+            if(!empty($list['page_2'])){
+                foreach ($list['page_2'] as $val){
+                     $uri = khongdau($val['title']);
+                ?>
+            <div class="conten_list_page_1 <?= ($stt>2)?"hidden-sm hidden-xs":"" ?>">
+                 <img src="<?= $this->baseUrl("/Upload/") . $val['images'] ?>" alt="<?= $val['title'] ?>" class="thumbnail pull-left img_page"/>
+                <a target="_parent" title="<?= $val['title'] ?>" href="<?= $this->baseUrl("/trang/$uri-$val[id]-$val[menu].html") ?>">
+                                            <h2 class="title_page"> <?= descr_excerpt($val['title'], 70)  ?></h2>
+                                        </a> 
+               
+                 <p class="date_page" style="padding-bottom: 0">
+                    <span><?= date("d/m/Y h:i:s",$val['date']) ?></span>
+                    <span class="text-right pull-right"> <a target="_parent" title="<?= $val['title'] ?>" href="<?= $this->baseUrl("/trang/$uri-$val[id]-$val[menu].html") ?>"> > Xem tiếp  </a> </span>
+                </p>
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+          
+        <?php  $stt++; } } ?>
+
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+     <?php  } } ?>

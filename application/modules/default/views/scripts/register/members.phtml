@@ -1,0 +1,134 @@
+<div class="row-fluid sortable">
+<div class="box span12">
+    
+    <div class="box-header well" data-original-title>
+						<h2><i class="icon-user"></i>Danh sách các tin đã đăng </h2>
+						
+  </div>
+    <div class="box-content">
+        
+        <form action="" method="post" enctype="multipart/form-data" name="tt_mh" id="tt_mh"  class="form-horizontal">
+ <div class="control-group">
+        <label class="control-label" for="selectError">Tìm kiếm</label>
+        <div class="controls">
+            <input name="title" type="text" class="span6 typeahead" id="typeahead"  data-provide="typeahead" data-items="4" style="float: left; margin-right: 10px; width: 250px" >
+            
+            
+            
+	
+            <button type="submit" class="btn btn-primary" style="margin-top: 2px">Search</button>
+        </div>
+    </div>
+            
+
+   
+                 
+               
+   
+</form>
+        <div class="clear"></div>
+        <h4>Để được đăng tin vip hiển thị trên trang chủ website chúng tôi. Xin vui lòng soạn <a href="javascrip:void(0)" style="color: #F00;">TINVIP ID gửi 6577 <br>(vd: TINVIP 1234 gửi 6577) </a>hoặc<a href="<?php echo $this->baseurl(); ?>/lien-he.html" title="liên hệ" style="color: #F00;"> liên hệ</a> với chúng tôi  vào số hotline : <a href="<?php echo $this->baseurl(); ?>/lien-he.html" title="liên hệ" style="color: #F00;">0974.547.155</a></h4>
+     
+
+
+
+
+<table class="table table-striped table-bordered bootstrap-datatable datatable">
+    <thead>
+    <tr>
+     <th >STT</th>
+  
+        <th >Tiêu đề</th>
+       
+    <th >Mã ID</th>
+    <th >Ngày tạo</th>
+    <th >Thuộc menu</th>
+    
+     <th >Lượt xem</th>
+      <th >Làm Mới</th>
+    <th >Xóa</th>
+    <th >Sửa</th>
+    </thead>
+  </tr>
+  
+  
+  
+      <?php
+      $stt=1;
+      $url=$this->baseUrl();
+      foreach($this->books as $val)
+        { 
+          
+           $id=$val['id'];
+          $title=$val['title'];
+          $url_1=  khongdau($title);
+          $menu_id=$val['menu_id'];
+          $muser= new Admin_Model_Products();
+          $mystring = $val['date'];
+        $findme   = '-';
+        $pos = strpos($mystring, $findme);
+        if ($pos === false) {
+             $date=gmdate("d-m-Y", $val['date'] + 7*3600);
+        } else {
+            $date	=$val['date'];
+        }
+          ?>
+      <tr>
+          <td > <?= $stt;?> </td>
+          <td><a href="<?= $url; ?>/chi-tiet/<?= $url_1; ?>-<?= $id; ?>.html" title="<?= $title; ?>"> <?= $val['title']; ?></a></td>
+      <td><?= $val['id']; ?></td>
+      
+      <td><?= $date; ?> </td>
+      <td><?php $muser->select_menu($menu_id); ?></td>
+      <td><?= $val['views']; ?></td>
+   
+      
+      
+   
+    <td>
+    
+        <a class="btn btn-danger" href="<?= $url; ?>/default/register/updatedate/id/<?= $id; ?>" >
+            <b>UP</b>
+	
+	</a>
+    
+    
+    </td>
+   
+    <td>
+    
+        <a class="btn btn-danger" href="<?= $url; ?>/default/register/deleteproducts/id/<?= $id; ?>" onclick="return confirm('Bạn có muốn xóa thông tin này?')">
+	<i class="icon-trash icon-white"></i> 
+	
+	</a>
+    
+    
+    </td>
+    <td ><a class="btn btn-info" href="<?= $url; ?>/update/<?= $url_1; ?>-<?= $id; ?>-<?= $menu_id; ?>.html">
+	<i class="icon-edit icon-white"></i>  
+	                                            
+	</a>
+    </td>
+  </tr>
+  
+  <?php $stt++;} ?>
+  
+ 
+  <tr ><td colspan="9">
+            <?php  
+   
+   echo $this->paginationControl($this->books,  'Sliding', 'page/pagination_members.phtml');
+
+      ?>   
+     
+      </td>
+  </tr>
+    
+</table>
+         
+    </div> 
+        
+</div>
+</div>
+<div class="clear"></div>
+<h4>Để được đăng tin vip hiển thị trên trang chủ website chúng tôi. Xin vui lòng soạn <a href="javascrip:void(0)" style="color: #F00;">TINVIP ID gửi 6577 <br>(vd: TINVIP 1234 gửi 6577) </a>hoặc<a href="<?php echo $this->baseurl(); ?>/lien-he.html" title="liên hệ" style="color: #F00;"> liên hệ</a> với chúng tôi  vào số hotline : <a href="<?php echo $this->baseurl(); ?>/lien-he.html" title="liên hệ" style="color: #F00;">0974.547.155</a></h4>

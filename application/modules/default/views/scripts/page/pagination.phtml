@@ -1,0 +1,35 @@
+  
+
+<?php if ($this->pageCount): ?>
+<?php if($this->pageCount!=1) {?>
+<div class="pagination pagination-centered" > 
+     <ul class="pagination">
+         
+<?php 
+    
+    $id=  Zend_Registry::get('idpage');
+    $url=Zend_Registry::get('titlepage');
+	if (isset($this->previous)){
+  		
+                echo '<li><a href="'.$this->baseurl('page/'.$url.'-'.$id.'-'.$this->previous.'.html'). '">  Previous</a> </li> ';
+	}
+	foreach ($this->pagesInRange as $page){
+	   if ($page != $this->current){
+	   		//echo  '<li><a href="' . $this->baseurl(array('page' => $page)). '">' . $page . '</a> </li> ';
+                         echo '<li><a href="'.$this->baseurl('page/'.$url.'-'.$id.'-'.$page.'.html'). '">  ' . $page . '</a> </li> ';
+	  }else{
+	  	echo "<li class=\"active\"><a>".$page . '</a></li> ';
+	  }
+   }
+	 if (isset($this->next)){
+		//echo '<li><a href="' . $this->baseurl(array('page' => $this->next)) . '">Next </a></li>';
+                
+                echo '<li><a href="'.$this->baseurl('page/'.$url.'-'.$id.'-'.$this->next.'.html'). '">  Next</a> </li> ';
+  	 }
+  ?>
+     </ul>
+</div>
+
+<?php 
+} 
+endif; ?>

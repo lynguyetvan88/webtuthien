@@ -1,0 +1,28 @@
+<div class="breadcrumb"><a href="<?= $this->baseUrl() ?>">Trang chủ</a> » <a href="<?= $this->baseUrl("/doi-tac.html") ?>"><?php echo "Đối tác"; ?></a></div>
+
+<div class="reservation_top">
+<?php
+                    if ($this->list) {
+                        foreach ($this->list as $val) {
+
+
+                          
+                            ?>
+                            <div class="col-xs-4 animation">
+                                <div class="pgl-property">
+                                    <div class="property-thumb-info">
+                                        <div class="property-thumb-info-image">
+                                            <a href="<?= $val['link'] ?>">   <img alt="<?= $val['title'] ?>" src="<?= $this->baseUrl("/Upload/$val[images]") ?>" class="img-responsive" > </a>
+
+                                        </div>
+                                        
+
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    }
+                    ?>
+    <div class="clearfix"></div>
+</div>

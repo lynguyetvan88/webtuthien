@@ -1,0 +1,136 @@
+<div id="content">
+<?php 
+        foreach ($this->book as $value)
+            {
+            
+                 $title=$value['title'];
+     $images=$value['images'];
+      $members=$value['members'];
+     
+       
+      
+       $id=$value['id'];
+       $district_id=$value['district_id'];
+        $menu_id=$value['menu_id'];
+        $content=$value['content'];
+         $type=$value['type'];
+         if($type==1){$dvt="Lốc";}
+         else{$dvt="Gói";}
+        $price=$value['price'];
+        $giaban=number_format($price, 0 , '.', '.');
+        
+        if($giaban<>0){$gia="$giaban"." VNĐ";}
+	else{$gia="Vui lòng liên hệ";}
+       
+         $description	=$value['description'];
+        $url=  khongdau($title);
+        $link= $this->baseUrl()."/$url-$id.html";
+        $images = $value['images'];
+                     $mask = APPLICATION_PATH . "/../Upload/$images";
+                    if (file_exists($mask)) {
+                        $images = $value['images'];
+                    } else {
+                        $images = "no-img.png";
+                    } 
+        
+     
+                ?>
+
+      <!--Breadcrumb Part Start-->
+       <div class="breadcrumb"><a href="<?= $this->baseUrl() ?>">Trang chủ</a> » <a href="<?= $this->baseUrl("san-pham.html") ?>"><?php echo "Sản phẩm "; ?></a> » <a href="<?= $this->baseUrl("$link") ?>"><?php echo $title; ?></a></div>
+      <!--Breadcrumb Part End-->
+      <div class="product-info">
+        <div class="left">
+          <div class="image"> <a href="<?= $link ?>" title="<?php echo $title; ?>" > 
+                  <img style="max-width: 400px" class="img-responsive" src="<?= $this->baseUrl() ?>/Upload/<?= $images ?>" title="<?php echo $title; ?>" alt="<?php echo $title; ?>" />
+                  </a> </div>
+          
+        </div>
+        <div class="right">
+          <h1><?php echo $title; ?></h1>
+          <div class="description"> <span>Mô tả:</span> <?= $description ?><br>
+            </div>
+          <div class="price">Giá bán: <span class="price-old"><?= number_format($value['price_root'], 0, ".", ".") ?> VNĐ</span>
+            <div class="price-tag"><?= $gia ?></div>
+            <br>
+            
+          </div>
+          
+          
+       
+          
+        </div>
+      </div>
+      <!-- Tabs Start -->
+      <div id="tabs" class="htabs"> <a href="#tab-description">Thông tin chi tiết</a>  </div>
+      <div id="tab-description" class="tab-content">
+        
+        <p><?= $content ?></p>
+        
+      </div>
+      <?php }  ?>
+      <!-- Tabs End -->
+      <!-- Related Products Start -->
+      <div class="box">
+        <div class="box-heading">Sản phẩm khác</div>
+        <div class="box-content pr_other">
+          <div class="box-product">
+               <?php 
+        foreach ($this->bookk as $val)
+            {
+                $id=$val['id'];
+        $title=$val['title'];
+        $images=$val['images'];
+         $mask = APPLICATION_PATH."/../Upload/$images"; 
+        if (file_exists($mask)){
+            $images=$val['images'];
+        } else {
+             $images="no-img.png";
+        }
+        $description	=$val['description'];
+       $mystring = $val['date'];
+        $findme   = '-';
+        $pos = strpos($mystring, $findme);
+        if ($pos === false) {
+             $date=gmdate("d-m-Y", $val['date'] + 7*3600);
+        } else {
+            $date	=$val['date'];
+        }
+         $area	=$val['area'];
+        if(strlen($description)>300)
+        {       $new_gioihan=strpos($description," ",300);
+                $new_chuoi = substr($description,0,$new_gioihan)."...";
+        }
+        else {  $new_chuoi= $description;
+        }
+        $price=$val['price'];
+        $giaban=number_format($price, 0 , '.', '.');
+        
+        if($giaban<>0){$gia="$giaban"." VNĐ";}
+	else{$gia="Liên hệ";}
+        $url=  khongdau($title);
+        $link=$this->baseUrl()."/$url-$id.html";
+        $code=$val['code'];
+        ?>
+            <div>
+              <div class="image"><a href="<?= $link ?>"><img alt="<?= $title ?>" src="<?= $this->baseUrl() ?>/Upload/<?= $images ?>"></a></div>
+              <div class="name"><a href="<?= $link ?>"><?= $title ?></a></div>
+               <div>  <span class="price-old"><?= number_format($val['price_root'], 0, ".", ".") ?> VNĐ</span> </div>
+              <div class="price">   <span class="price-new"><?= $gia ?></span> </div>
+             
+              <a href="<?= $link ?>" class="button">Xem chi tiết</a></div>
+           
+        <?php }  ?>      
+         
+        </div>
+      </div>
+      <!-- Related Products End -->
+    </div>
+            
+
+
+        
+
+
+
+

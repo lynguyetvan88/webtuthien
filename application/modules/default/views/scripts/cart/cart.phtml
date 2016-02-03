@@ -1,0 +1,134 @@
+
+                	
+                    	
+                        <div class="title1"> 
+                        <div style="padding-top:11px; padding-left:65px"><span style="padding-top:10px;">YOUR CART</span></div>
+                        </div>
+                      <form name="your-cart" id="your-cart" action="" method="POST">  
+                 <?php 
+                 $count= (count($this->cart));
+              
+                    if ($count !=0){
+                 ?>
+                     <div class="sanpham">
+                     	
+                            <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                        <thead>
+                                    <tr>
+                                    <th >ID</th>
+
+                                    <th >Tiêu đề</th>
+                                    <th >Số lượng</th>
+                                    <th >Giá bán</th>
+                                    <th >Tổng tiền </th>
+                                   
+                                    </tr>
+                        </thead>
+                     	
+                       
+                        	
+                            <?php 
+//                            echo '<pre>';
+//                            print_r($this->cart);
+//                            echo '</pre>';
+                           // echo ($this->cart[0]);
+                            
+                             
+                            $cart = $this->cart;
+                           
+                             
+                           
+                            
+                                //echo $cart[$i];
+                            	if(count($this->Items)>0){
+                            		$totalPrice = 0;
+                            		foreach ($this->Items as  $val){
+                            			$name = $val['title'];
+                            			$id = $val['id'];
+                            			$price = $val['price'];
+                            			 $quantity = $cart[$id];
+                                                
+                            			$total = 0;
+                                                
+                                                 
+                                            $price=number_format($price, 0 , '.', '.');
+	                            		
+                                            //$price = '<span class="price-1" style="text-decoration: line-through;">$' . $price . '</span> ';
+
+                                             $total = $quantity * $val['price']; 
+                                             $totalPrice += $total; 
+                                            
+                                            $total = number_format($total, 0 , '.', '.');		 
+		                          		
+		                          	
+		                          		
+									  
+//		                          		$linkDetial = $this->baseUrl('/shopping/index/detail/cid/' . $val['cat_id'] 
+//	                          									 . '/tcat/' . $val['category_name'] 
+//	                          									 . '/id/' . $val['id'] . '/title/' . $filter->filter($val['name']));
+
+	                          		    $itemProduct = 'itemProduct[' . $val['id'] . ']';				 
+                            			$itemProduct = $this->formText($itemProduct,$quantity,
+                            											array('style'=>'width: 35px; text-align: center; font-size: 11px; background-color:#FFC;'));
+
+                            			$linkOrder = $this->baseUrl('/shopping/index/order');
+                            			$linkBack = $this->baseUrl('/shoppingcart');
+                                                $linkupdate = $this->baseUrl('/shopping/index/order');
+                            ?>
+                        <tr>
+                            <td><?php echo $id;?></td>
+                            <td><a href="<?php //echo $linkDetial;?>" class="itemLink" target="_blank"><?php echo $name;?></a></td>
+                            <td><?php echo $itemProduct;?> </td>
+                            <td><?php echo $price;?></td>
+                            <td><?php echo $total;?></td>
+                        </tr>
+              			
+                         	<?php 
+                            		
+                                } }
+                         	?>   
+                            
+                        <tr>
+                            <td colspan="4" style="text-align: right;" >Tổng số tiền bạn phải trả là:</td>
+                            <td><?php 
+                            $totalPrice =number_format($totalPrice, 0 , '.', '.');
+                            echo  $totalPrice;?>  </td>
+                        </tr>  
+                            </table>
+                        <div class="clear"></div>
+                           
+                                          	
+                        <div class="cartDetail-button">
+                        	<input type="button" name="update" id="update" value="&laquo; Tiếp tục mua hàng" class="btn btn-primary" /> 
+                        	<input type="submit" name="update" id="load" value="Cập nhật giỏ hàng" class="btn btn-primary"  /> 
+                                <input type="button" name="update" id="order" value="Gửi thanh toán &raquo;" class="btn btn-primary" /> 
+                            
+                        </div>
+                      
+ 
+                        
+                        </form> 
+                  </div>
+<?php } else { echo "Bạn chưa mua hàng"; } ?>
+<script>
+     $( "#update" ).click(function() {
+            
+//            $( ".sanpham" ).load( "ajax/test.html" );
+        window.location.href='<?= $this->baseUrl() ?>';
+  
+        });
+
+    
+        $( "#load" ).click(function() {
+            
+//            $( ".sanpham" ).load( "ajax/test.html" );
+            window.location.href='<?= $this->baseUrl() ?>/shoppingcart';
+        });
+
+
+    
+        $( "#order" ).click(function() {
+             window.location.href='<?= $this->baseUrl() ?>/order';
+});
+</script>    
+

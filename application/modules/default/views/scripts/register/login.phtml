@@ -1,0 +1,61 @@
+<script type="text/javascript" src="<?php echo $this->baseurl();  ?>/js/AJAX_1.js"></script>
+
+<?php 
+    $act=new Default_Model_User();
+   $xddn= $act->active_login();
+   if ($xddn==2){
+?>
+
+<div class="row-fluid sortable">
+<div class="box span12">
+    <div class="box-header well" data-original-title>
+        <h2><i class="icon-user"></i> Đăng nhập </h2>
+        
+  </div>
+     <div class="box-content">
+<form action="" method="post" enctype="multipart/form-data" name="tt_mh" id="tt_mh" onsubmit="return checkInput();" class="form-horizontal">
+    
+     
+    
+     <div class="control-group">
+                  <label class="control-label" for="typeahead">Username </label>
+                  <div class="controls">
+                      <input name="username" type="text" class="span6 typeahead" id="username" placeholder="Username"  data-provide="typeahead" data-items="4" >
+                      <div class="warning" id="usernameError">Vui lòng username của bạn</div>
+                  </div>
+    </div>
+    
+    
+    
+    
+    <div class="control-group">
+                  <label class="control-label" for="typeahead">Password </label>
+                  <div class="controls">
+                    <input name="password" type="password"  class="span6 typeahead" id="password"  >
+                    <div class="warning" id="passwordError">Vui lòng password của bạn</div>
+               
+                  </div>
+    </div>
+    
+    
+    
+    
+    
+    
+       
+     
+        
+        <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" id="login-form">Đăng nhập</button>
+                  <button type="reset" class="btn">Cancel</button>
+          </div>
+      
+    </form>
+     </div>
+</div></div>
+<div class="clear"></div>
+<?php } else { ?> 
+    
+    
+    
+    <?php $link= $this->baseurl()."/"."thanh-vien.html";  thongbao('Chúc mừng bạn đã đăng nhập thành công ');chuyen_trang($link);}?>

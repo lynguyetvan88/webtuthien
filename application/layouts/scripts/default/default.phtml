@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+       <?php 
+       
+            echo $this->headTitle();
+            echo $this->headScript();
+            echo $this->doctype();
+            //echo $this->;
+            // echo $this->serverUrl();
+            // echo $this->url(array('view'=>'change'));
+    ?>
+       <?php echo $this->headLink(); ?>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        </head>
+    <body>
+        <div id="page">
+<div id="banner">
+  
+    <?php 
+                
+        echo $this->banner();
+    ?>
+ </div>
+
+<div class="td_banner">
+
+ 
+  <?php
+echo $this->menu();					
+								
+	?>
+   
+</div>
+ 
+
+
+
+
+   
+<div id="noidung">
+
+<div class="left">
+    <?php 
+  echo  Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
+    echo $moduleName=$this->getRequest()->getModuleName(); 
+         echo $this->menumembers();?>
+    <?php echo $this->menuleft();?>
+
+</div>
+
+
+
+
+
+
+<div class="center">
+
+
+    <?php echo $this->layout()->content; ?>
+      
+</div>
+
+
+
+
+
+
+<div class="right">
+ <?php echo $this->menuright();	?>
+
+</div>
+
+
+
+<div style="clear:both"></div>
+</div>
+
+
+
+<div class="footer">
+<?php
+//		switch($ngon_ngu_abc)
+//		{
+//			case"tieng_anh":
+//				include('footer/footer_en.php');
+//				
+//			break;
+//			default:
+//				include('footer/footer.php');
+//				
+//		}
+//								
+								
+	?>
+
+
+</div>
+
+
+</div>
+        
+    </body>
+    
+</html>

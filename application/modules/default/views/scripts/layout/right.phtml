@@ -1,0 +1,283 @@
+<?php
+
+function online() {
+    $rip = $_SERVER['REMOTE_ADDR'];
+    $sd = time();
+    $count = 1;
+    $maxu = 1;
+
+    $file1 = APPLICATION_PATH . "/../counter/online.log";
+    $lines = file($file1);
+    $line2 = "";
+
+    foreach ($lines as $line_num => $line) {
+        if ($line_num == 0) {
+            $maxu = $line;
+        } else {
+            $fp = strpos($line, '****');
+            $nam = substr($line, 0, $fp);
+            $sp = strpos($line, '++++');
+            $val = substr($line, $fp + 4, $sp - ($fp + 4));
+            $diff = $sd - $val;
+
+            if ($diff < 300 && $nam != $rip) {
+                $count = $count + 1;
+                $line2 = $line2 . $line;
+            }
+        }
+    }
+
+    $my = $rip . "****" . $sd . "++++\n";
+    if ($count > $maxu)
+        $maxu = $count;
+
+    $open1 = fopen($file1, "w");
+    fwrite($open1, "$maxu\n");
+    fwrite($open1, "$line2");
+    fwrite($open1, "$my");
+    fclose($open1);
+    $count = $count;
+    $maxu = $maxu + 200;
+
+    return $count;
+}
+
+///////////////////////
+$ip = $_SERVER['REMOTE_ADDR'];
+
+$file_ip = fopen(APPLICATION_PATH . "/../counter/ip.txt", 'rb');
+while (!feof($file_ip))
+    $line[] = fgets($file_ip, 1024);
+for ($i = 0; $i < (count($line)); $i++) {
+    list($ip_x) = explode("\n", $line[$i]);
+    if ($ip == $ip_x) {
+        $found = 1;
+    }
+}
+fclose($file_ip);
+
+if (!($found == 1)) {
+    $file_ip2 = fopen(APPLICATION_PATH . "/../counter/ip.txt", 'ab');
+    $line = "$ip\n";
+    fwrite($file_ip2, $line, strlen($line));
+    $file_count = fopen(APPLICATION_PATH . "/../counter/count.txt", 'rb');
+    $data = '';
+    while (!feof($file_count))
+        $data .= fread($file_count, 4096);
+    fclose($file_count);
+    list($today, $yesterday, $total, $date, $days) = explode("%", $data);
+    if ($date == date("Y m d"))
+        $today++;
+    else {
+        $yesterday = $today;
+        $today = 1;
+        $days++;
+        $date = date("Y m d");
+    }
+    $total++;
+    $line = "$today%$yesterday%$total%$date%$days";
+
+    $file_count2 = fopen(APPLICATION_PATH . "/../counter/count.txt", 'wb');
+    fwrite($file_count2, $line, strlen($line));
+    fclose($file_count2);
+    fclose($file_ip2);
+}
+
+function today() {
+    $file_count = fopen(APPLICATION_PATH . "/../counter/count.txt", 'rb');
+    $data = '';
+    while (!feof($file_count))
+        $data .= fread($file_count, 4096);
+    fclose($file_count);
+    list($today, $yesterday, $total, $date, $days) = explode("%", $data);
+    return $today;
+}
+
+function yesterday() {
+    $file_count = fopen(APPLICATION_PATH . "/../counter/count.txt", 'rb');
+    $data = '';
+    while (!feof($file_count))
+        $data .= fread($file_count, 4096);
+    fclose($file_count);
+    list($today, $yesterday, $total, $date, $days) = explode("%", $data);
+    return $yesterday;
+}
+
+function total() {
+    $file_count = fopen(APPLICATION_PATH . "/../counter/count.txt", 'rb');
+    $data = '';
+    while (!feof($file_count))
+        $data .= fread($file_count, 4096);
+    fclose($file_count);
+    list($today, $yesterday, $total, $date, $days) = explode("%", $data);
+    return $total;
+}
+
+function avg() {
+    $file_count = fopen(APPLICATION_PATH . "/../counter/count.txt", 'rb');
+    $data = '';
+    while (!feof($file_count))
+        $data .= fread($file_count, 4096);
+    fclose($file_count);
+    list($today, $yesterday, $total, $date, $days) = explode("%", $data);
+    echo ceil($total / $days);
+}
+?>
+<?php
+$sys = new Default_Model_System();
+$page = new Default_Model_Page();
+$video = $page->list_video("0,1");
+$page_ = $page->list_Page_1(125);
+$adv = $page->list_Page_1(124);
+$list_support = $sys->list_support();
+$calander = $page->calander();
+$list_page_new = $page->list_Page_3e();
+
+$controller = Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
+$action = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
+if ($controller != "index" && $action != "index") {
+    ?>
+    <div class="title">
+        Tin mới
+    </div>
+    <div class="content_page">
+        <?php
+        if (!empty($list_page_new)) {
+            foreach ($list_page_new as $val) {
+                $uri = khongdau($val['title']);
+                ?>
+                <div class="conten_list_page_1">
+
+                    <a target="_parent" title="<?= $val['title'] ?>" href="<?= $this->baseUrl("/trang/$uri-$val[id]-$val[menu].html") ?>">
+                        <img src="<?= $this->baseUrl("/Upload/") . $val['images'] ?>" alt="<?= $val['title'] ?>" class="thumbnail pull-left img_page"/>
+                        <h2 class="title_page"> <?= descr_excerpt($val['title'], 70) ?></h2>
+                    </a> 
+
+                    <p class="date_page">
+                        <span><?= date("d/m/Y h:i:s", $val['date']) ?></span>
+                        <span class="text-right pull-right"> <a target="_parent" title="<?= $val['title'] ?>" href="<?= $this->baseUrl("/trang/$uri-$val[id]-$val[menu].html") ?>"> > Xem tiếp  </a> </span>
+                    </p>
+<div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+
+            <?php }
+        } ?>
+        <div class="clearfix"></div>
+    </div>
+<?php } ?>
+<div class="title">
+    Hổ trợ trực tuyến
+</div>
+<div class="content_page support">
+    <?php
+    if (!empty($list_support)) {
+        foreach ($list_support as $list) {
+            $loai_nick = $list['loai_nick'];
+            $tendaidien = $list['name'];
+            $ten_nick = "$list[nickname]";
+            $dt = "$list[hotline]";
+            if ($loai_nick == "yahoo") {
+
+                echo "<div class=\"text-center pull-right\"  style=\"padding-bottom:10px; padding-top:10px; padding-right:25px;  \" align=\"center\"> "
+                . "<strong>$tendaidien</strong> "
+                . "<a href=\"ymsgr:sendim?$ten_nick\">
+               
+<img src=\"http://opi.yahoo.com/online?u=$ten_nick&m=g&t=2&l=us\"  height=\"23\" border=\"0\" width=\"107\"  align=\"absmiddle\">
+                 </a>
+                </div>"
+                . " <div class=\"clearfix\"></div>";
+            } else {
+                ?>
+                <div class="text-center pull-right" style="padding-bottom: 10px;padding-right:25px;">
+
+
+                    <strong> <?= $tendaidien ?></strong>
+                    <a title="Talk with me via Skype " href="skype:<?= $ten_nick ?>?chat"><img  alt="Talk with me via Skype" src="<?= $this->baseUrl("/template/front-end/images/online_03.png") ?>"></a>
+
+                </div>
+                <div class="clearfix"></div>
+                <?php
+            }
+        }
+    }
+    ?>
+
+    <div class="clearfix"></div>
+    <?= $page_[0]['content'] ?>
+</div>
+
+<div class="title">
+    Video mới
+</div>
+<div class="content_page video">
+    <?php
+    if (!empty($video)) {
+        foreach ($video as $val) {
+               $title = $val["title"];
+                       $url_1 = khongdau($title);
+                       $video_id = $val["video_id"];
+            ?>
+
+            <a href="<?= $this->baseUrl("/videos/$url_1-$video_id.html") ?>" title="" class="title_video">
+                <img src="http://img.youtube.com/vi/<?php echo get_youtube_id($val['link']); ?>/hqdefault.jpg" class="img-responsive"/>
+                <div class="clearfix"></div>
+                <?= $val['title'] ?>
+            </a>
+            <div class="clearfix"></div>
+            <a target="_parent" class="pull-right" title="video" href="<?= $this->baseUrl("/video.html") ?>">
+                <span class="readmore"> &gt; Xem các video khác </span>
+            </a>
+            <div class="clearfix"></div>
+            <?php
+        }
+    }
+    ?>
+</div>
+
+<div class="title">
+    Lịch vạn niên
+</div>
+<div class="content_page video">
+    <?= $calander ?>
+    <div class="clearfix"></div>
+</div>
+
+
+<div class="title">
+    Thông kế truy cập
+</div>
+<div class="content_page video">
+    <div class="count">
+        <div class="vdigit_counter text-center">
+            <?php $total = total(); 
+                $total_2 = (strlen($total)>=2)?substr($total, -2, 1):"0";
+                $total_3 = (strlen($total)>=3)?substr($total, -3, 1):"0";
+                $total_4 = (strlen($total)>=4)?substr($total, -4, 1):"0";
+                $total_5 = (strlen($total)>=5)?substr($total, -5, 1):"0";
+                $total_6 = (strlen($total)>=6)?substr($total, -6, 1):"0";
+               
+            ?> 
+            <span title="Vinaora Visitors Counter" class="vdigit-<?= $total_6 ?>"><?= $total_6 ?></span>
+            <span title="Vinaora Visitors Counter" class="vdigit-<?= $total_5 ?>"><?= $total_5 ?></span>
+            <span title="Vinaora Visitors Counter" class="vdigit-<?= $total_4 ?>"><?= $total_4 ?></span>
+            <span title="Vinaora Visitors Counter" class="vdigit-<?= $total_3 ?>"><?= $total_3 ?></span>
+            <span title="Vinaora Visitors Counter" class="vdigit-<?= $total_2 ?>"><?= $total_2 ?></span>
+            <span title="Vinaora Visitors Counter" class="vdigit-<?= substr($total, -1); ?>"><?= substr($total, -1); ?></span>
+           
+        </div>
+       
+        <i class="fa fa-user"  style="color: #8cd600"></i> Đang trực tuyến : <b><?php echo online(); ?> </b> 
+        <br/>
+        <i class="fa fa-user"  style="color: #FF0000"></i> Hôm nay : <b><?php echo today(); ?> </b> 
+        <br/>
+        <i class="fa fa-user"  style="color: #0000FF"></i> Hôm qua : <b><?php echo yesterday(); ?> </b> 
+    </div>
+    <div class="clearfix"></div>
+</div>
+<?php if ($controller == "index" && $action == "index") {
+    ?>
+<div class="qc">
+    <?= $adv[0]['content'] ?>
+</div>
+<?php } ?>

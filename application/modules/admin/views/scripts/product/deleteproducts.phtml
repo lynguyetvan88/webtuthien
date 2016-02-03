@@ -1,0 +1,17 @@
+ <?php 
+            
+             
+             foreach($this->bookss as $val1)
+            {
+                
+            
+                $images=$val1['images']; 
+                $id=$val1['id'];
+                 $mask = APPLICATION_PATH."/../public_html/Upload/$images"; 
+                array_map("unlink",glob($mask)); 
+                 $del2= new Admin_Model_Products();
+                $del2->delete_Products($id);
+                //trang_truoc();
+                        
+            }
+?>

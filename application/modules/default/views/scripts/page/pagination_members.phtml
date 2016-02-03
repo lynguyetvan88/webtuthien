@@ -1,0 +1,36 @@
+  
+
+<?php if ($this->pageCount): ?>
+<?php if($this->pageCount!=1) {?>
+<div class="pagination pagination-centered" > 
+     <ul class="navi">
+         
+<?php 
+    
+   
+	if (isset($this->previous)){
+  		
+                echo '<li><a href="'.$this->baseurl('thanh-vien-'.$this->previous.'.html'). '">  Previous</a> </li> ';
+	}
+	foreach ($this->pagesInRange as $page){
+	   if ($page != $this->current){
+	   		//echo  '<li><a href="' . $this->baseurl(array('page' => $page)). '">' . $page . '</a> </li> ';
+                         echo '<li><a href="'.$this->baseurl('thanh-vien-'.$page.'.html'). '">  ' . $page . '</a> </li> ';
+	  }else{
+	  	echo "<li class=\"active\"><a>".$page . '</a></li> ';
+	  }
+   }
+	 if (isset($this->next)){
+		//echo '<li><a href="' . $this->baseurl(array('page' => $this->next)) . '">Next </a></li>';
+                
+                echo '<li><a href="'.$this->baseurl('thanh-vien-'.$this->next.'.html'). '">  Next</a> </li> ';
+  	 }
+  ?>
+     </ul>
+</div>
+
+<?php 
+} else {
+    
+}
+endif; ?>

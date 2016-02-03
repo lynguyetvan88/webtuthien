@@ -1,0 +1,71 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 1, 2016, 8:20:39 PM
+    Author     : LYANH77
+*/
+.dm{display: none}
+.mt{display: none}
+.animenu__nav > li.search_mobile {display: none}
+.animenu__nav > li.support_mobile {display: none}
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) {
+/* Styles */ 
+
+#logo {height: 150px;
+    top: -156px;}
+#this_year .thang td.ngaytuan{padding:0}
+}
+@media screen and (max-width: 800px) {
+    section#content .content_right {display: none}
+}
+@media screen and (max-width: 768px) {
+    #welcome .hidden-md {display: none}
+    .dm{display: block; color:#01BDEF; line-height: 40px; font-weight: bold; background: #fff; padding-left: 20px;
+   padding-right: 20px;
+    }
+    .mt{display: block; 
+        width: 0; 
+	height: 0; 
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent; 
+	
+	border-left:20px solid #fff; 
+    }
+    #logo {height: 80px;
+    top: -32px;}
+    .animenu__nav > li.search_desktop{display: none}
+    .animenu__nav > li.search_mobile {display: block; padding-right: 15px; background: #000; height: 50px; padding-top: 10px}
+    #key_search_mobile{height: 27px; border: 0; border-radius: 0}
+    #btn_search_mobile {border: 0}
+    .animenu__nav > li.search_mobile div:hover{background: none; }
+    .thumbnail {margin: 0; margin-bottom: 15px}
+    .animenu__nav > li.support_mobile {display: block; padding-top: 10px }
+    .animenu__nav > li.support_mobile .title_sb {background: #999999;  height: 37px;
+       text-align: left; line-height: 40px; font-size: 14px; font-weight: bold; text-transform: uppercase;
+        color: #666666; position: relative; z-index: 1; text-align: center
+} 
+.animenu__nav > li.support_mobile .support {color: #fff !important}
+.animenu__nav > li.support_mobile:hover {background: none}
+ .animenu__nav > li.support_mobile .support:hover{background: none; }
+ .animenu__nav > li.support_mobile .title_sb:hover{background: none; }
+ .animenu__nav > li.support_mobile div:hover{background: none; }
+ .animenu__nav > li:hover {background:  none; -webkit-transition: background-color 0.5s ease-out;
+  -moz-transition: background-color 0.5s ease-out;
+  -o-transition: background-color 0.5s ease-out;
+  transition: background-color 0.5s ease-out;}
+ .animenu__nav > li.support_mobile .support a:hover {background: none}
+ .animenu__nav > li.support_mobile .support img {width: 150px; height: auto}
+ section#content .content_left .product-list img{height: auto}
+ 
+    
+}
+@media screen and (max-width: 360px) { 
+section#content .content_left .product-list .grid_page .list_l img{height: 62px;}
+section#content .content_left .product-list .grid_page .list_l{padding: 0;  margin-right: 5px}
+section#content .content_left .product-list a {color: #000}
+}

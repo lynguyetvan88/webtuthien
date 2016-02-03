@@ -1,0 +1,47 @@
+<div id="content">
+    <!--Breadcrumb Part Start-->
+    <div class="breadcrumb"> <a href="<?= $this->baseUrl() ?>">Home</a> » <a href="<?= $this->baseUrl("/san-pham.html") ?>">Sản phẩm</a></div>
+   
+    <!--Breadcrumb Part End-->
+    <?php
+foreach ($this->list as $list) {
+    $url = khongdau($list['title']);
+    ?>
+    <div class="main_title"> <a style="color: #fff" href="<?= $this->baseUrl("/danh-muc/$url-$list[id].html") ?>"> <h1><?= $list['title'] ?></h1></a></div>
+   
+    <div class="product-grid">
+          <?php
+                foreach ($list['product'] as $val) {
+                    $url = khongdau($val['title']);
+                    $id = ($val['id']);
+                     $images = $val['images'];
+                     $mask = APPLICATION_PATH . "/../Upload/$images";
+                    if (file_exists($mask)) {
+                        $images = $val['images'];
+                    } else {
+                        $images = "no-img.png";
+                    }
+                    $price = number_format($val['price'], 0, ".", ".");
+                    ?>
+        <div>
+            <div class="image"><a href="<?= $this->baseUrl("/") . $url . "-" . $id . ".html" ?>" title="<?= $val['title'] ?>">
+                    <img src="<?= $this->baseUrl() ?>/Upload/<?= $images ?>" alt="<?= $val['title'] ?>" class="img-responsive" />
+                </a>
+            </div>
+            <div class="name"><a href="<?= $this->baseUrl("/") . $url . "-" . $id . ".html" ?>" title="<?= $val['title'] ?>"><?= $val['title'] ?></a></div>
+           <span class="price-old"><?= number_format($val['price_root'], 0, ".", ".") ?> VNĐ</span>
+            <div class="price"> <?= !empty($val['price'])? $price. " VNĐ" :"Liên Hệ" ?> </div>
+            
+            
+        </div>
+        <?php  } ?>
+        
+    </div>
+    
+        <div class="buttons">
+        <div class="right">
+            <a class="button" href="<?= $this->baseUrl("/danh-muc/$url-$list[id].html") ?>"> Xem tất cả </a>
+        </div>
+      </div>
+<?php } ?>
+</div>

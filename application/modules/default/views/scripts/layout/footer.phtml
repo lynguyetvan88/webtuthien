@@ -1,0 +1,83 @@
+<?php
+$sys = new Default_Model_System();
+$list_ = $sys->list_system();
+$list = $sys->list_menu_page();
+?>
+
+<div class="foo_1"></div>
+<div class="foo_2">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <h3>CÂU LẠC BỘ TỪ THIỆN TỰ NGUYỆN  HỘI TỤ NHÂN TÂM GIÚP ĐỠ CỘNG ĐỒNG</h3>
+                <div class="visible-lg visible-md">
+                <ul class="list-inline">
+                    <li><a href="<?= $this->baseUrl() ?>" ><i class="fa fa-arrow-circle-right"></i> Trang chủ</a></li>
+
+                    <?php
+                    foreach ($list as $val) {
+                        $menu_id = $this->escape($val['id']);
+                        $parent = $val['parent'];
+                        $cat_page = $this->escape($val['cat_page']);
+                        $title = ($val['title']);
+                        $url_1 = khongdau($title);
+                        $link_page = $this->baseUrl() . "/pages/$url_1-$menu_id.html";
+                        ?>
+                        <li>
+                            <a href="<?= $link_page ?>"> <i class="fa fa-arrow-circle-right"></i> <?php echo $title; ?></a>
+
+                        </li>
+                    <?php } ?>
+
+                    <li><a href="<?= $this->baseUrl("/video.html") ?>"><i class="fa fa-arrow-circle-right"></i> Video từ thiện</a></li>
+                    <li><a href="javascript:void(0)"><i class="fa fa-arrow-circle-right"></i> Hội viên</a></li>
+                    <li><a href="<?= $this->baseUrl("/lien-he.html") ?>"><i class="fa fa-arrow-circle-right"></i> Liên hệ</a></li>
+                </ul>
+                </div>
+                
+                <div class="visible-sm visible-xs">
+                     <div class="col-xs-7">
+                    <div><a href="<?= $this->baseUrl() ?>" ><i class="fa fa-arrow-circle-right"></i> Trang chủ</a></div>
+
+                    <?php
+                    foreach ($list as $val) {
+                        $menu_id = $this->escape($val['id']);
+                        $parent = $val['parent'];
+                        $cat_page = $this->escape($val['cat_page']);
+                        $title = ($val['title']);
+                        $url_1 = khongdau($title);
+                        $link_page = $this->baseUrl() . "/pages/$url_1-$menu_id.html";
+                        ?>
+                        <div>
+                            <a href="<?= $link_page ?>"> <i class="fa fa-arrow-circle-right"></i> <?php echo $title; ?></a>
+
+                        </div>
+                    <?php } ?>
+
+                   
+                </div>
+                    
+                    <div class="col-xs-5">
+                   
+
+                    <div><a href="<?= $this->baseUrl("/video.html") ?>"><i class="fa fa-arrow-circle-right"></i> Video từ thiện</a></div>
+                    <div><a href="javascript:void(0)"><i class="fa fa-arrow-circle-right"></i> Hội viên</a></div>
+                    <div><a href="<?= $this->baseUrl("/lien-he.html") ?>"><i class="fa fa-arrow-circle-right"></i> Liên hệ</a></div>
+                </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="foo_3">
+    <div class="container">
+        <div class="row">
+            <?= $list_[0]['footer'] ?>
+
+        </div>
+    </div>
+
+
+</div>

@@ -1,0 +1,16 @@
+.icon.icon-darkgray{
+background-image: url('../img/opa-icons-black16.png');
+}
+.icon.icon-orange{
+background-image: url('../img/opa-icons-orange16.png');
+}
+
+.icon.icon-rssfeed{
+background-position: -240px -64px;
+}
+.icon.icon-cart{
+background-position: -128px -128px;
+}
+.icon.icon-globe{
+background-position: -160px -112px;
+}

@@ -1,0 +1,236 @@
+<div>
+<ul class="breadcrumb">
+        <li>
+                <a href="<?php echo $this->baseUrl(); ?>/admin/index/">Trang chủ</a> <span class="divider">/</span>
+        </li>
+        <li>
+                <a href="<?php echo $this->baseUrl(); ?>/admin/page/index/">Thêm loại trang</a> <span class="divider">/</span>
+        </li>
+        <li>
+                <a href="<?php echo $this->baseUrl(); ?>/admin/page/listpage/">Danh sách loại trang</a> <span class="divider">/</span>
+        </li>
+         <li>
+                <a href="<?php echo $this->baseUrl(); ?>/admin/page/addpages/">Thêm trang mới</a> <span class="divider">/</span>
+        </li>
+         <li>
+                <a href="<?php echo $this->baseUrl(); ?>/admin/page/listpages/">Danh sách  trang</a>
+        </li>
+</ul>
+</div>
+
+
+<?php
+     $id_page = $this->cat_page_id;
+    $authNamespace = new Zend_Session_Namespace('page_id');
+$authNamespace->id_page = $id_page;
+	function hop_option_de_quy($id,$so)
+	{
+            
+            $db1=Zend_Registry::get('connectDB'); 
+		$so++;
+		$kt="";
+		for($i=1;$i<=$so;$i++)
+		{
+			$kt=$kt."&DoubleRightArrow;&DoubleRightArrow;&DoubleRightArrow;";
+		}
+                
+                $sql1 = "SELECT * FROM `add_page` where cat_page_id ='$id' ";
+                $stml1= $db1->prepare($sql1);
+                $stml1->execute();
+		
+		 while ($result1=$stml1->fetch(PDO::FETCH_ASSOC)) {
+			echo "<option value='$result1[id]'>";
+				echo $kt;
+				echo $result1['title'];
+			echo "</option>";
+			
+			
+			
+				hop_option_de_quy($result1['id'],$so);
+			
+		}
+	}
+        
+	function hop_option()
+	{
+           $authNamespace = new Zend_Session_Namespace('page_id');
+           
+                $db=Zend_Registry::get('connectDB'); 
+                $sql = "SELECT * FROM `add_page` where cat_page_id like '' ";
+                $stml= $db->prepare($sql);
+                $stml->execute();
+		  
+		echo "<select name=\"cat_page_id\" >";
+		echo "<option value=\"\">Cấp đầu</option>";
+		while ($result=$stml->fetch(PDO::FETCH_ASSOC)) 
+		{
+                    if($result['id']==$authNamespace->id_page){
+                        $sl="selected";
+                    } else {
+                        $sl="";
+                    }
+			echo "<option $sl value=\"$result[id]\">";
+				echo $result['title'];
+			echo "</option>";
+			
+				hop_option_de_quy($result['id'],0);
+			
+		}
+		echo "</select>";
+	}
+
+
+?>
+
+<div class="row-fluid sortable">
+<div class="box span12">
+    
+    <div class="box-header well" data-original-title>
+						<h2><i class="icon-user"></i> Members</h2>
+						<div class="box-icon">
+							<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+						</div>
+  </div>
+    <div class="box-content">
+
+<?php
+//Zend_Session::namespaceUnset('page_id');
+foreach ($this->books as $val)
+{
+
+    $content = thay_the_fckeditor($val['content']);
+ 
+    ?>
+   
+  
+ 
+    
+<form action='' method='post' enctype='multipart/form-data' name='tt_mh' id='tt_mh'class="form-horizontal"  >
+    <div class="control-group">
+                  <label class="control-label" for="typeahead">Cấp độ </label>
+                  <div class="controls">
+                    <?php hop_option(); ?>
+                    
+               
+                  </div>
+	</div>
+    <div class="control-group">
+                  <label class="control-label" for="typeahead">Tiêu đề </label>
+                  <div class="controls">
+                      <input name="title" value="<?php  echo $this->escape($val['title']); ?>" type="text" class="span6 typeahead" id="typeahead"  data-provide="typeahead" data-items="4" data-source='["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]'>
+                    
+               
+                  </div>
+    </div>
+    
+    <div class="control-group">
+                  <label class="control-label" for="typeahead">Description </label>
+                  <div class="controls">
+                   
+                     <textarea name="dis" cols="70" rows="10" class="span6 typeahead" id="typeahead" ><?php  echo $this->escape($val['dis']); ?></textarea>
+               
+                  </div>
+	</div>
+            
+           
+           
+                     
+                     
+         <div class="control-group">
+                  <label class="control-label" for="typeahead">Keywords </label>
+                  <div class="controls">
+                   
+                     <textarea name="key" cols="70" rows="10" class="span6 typeahead" id="typeahead" ><?php  echo $this->escape($val['key']); ?></textarea>
+               
+                  </div>
+	</div>
+    <div class="control-group">
+                  <label class="control-label" for="typeahead">Vị trí </label>
+                  <div class="controls">
+                    <input name="position" value="<?php  echo $this->escape($val['position']); ?>" type="text" class="span6 typeahead" id="typeahead"  data-provide="typeahead" data-items="4" data-source='["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]'>
+                    
+               
+                  </div>
+	</div>
+    <div class="control-group">
+            <label class="control-label">Hiển thị</label>
+            <div class="controls">
+              <label class="radio">
+                    <input type="radio" name="active" id="optionsRadios1" value="1" <?php if ($val['active']==1){    echo 'checked';} ?>>
+                    Có
+              </label>
+              <div style="clear:both"></div>
+              <label class="radio">
+                    <input type="radio" name="active" id="optionsRadios2" value="2"<?php if ($val['active']==2){    echo 'checked';} ?>>
+                   Không
+              </label>
+            </div>
+	</div>
+    
+    <div class="control-group">
+            <label class="control-label">Phân loại</label>
+            <div class="controls">
+              <label class="radio">
+                    <input type="radio" name="cat_page" id="optionsRadios1" value="1" <?php if ($val['cat_page']==1){    echo 'checked';} ?>>
+                    Chứa sản phẩm
+              </label>
+              <div style="clear:both"></div>
+              <label class="radio">
+                    <input type="radio" name="cat_page" id="optionsRadios2" value="2"<?php if ($val['cat_page']==2){    echo 'checked';} ?>>
+                   Chứa nội dung
+              </label>
+            </div>
+	</div>
+    
+    <div class="control-group" id="content">
+              <label class="control-label" for="textarea2">Nội dung</label>
+              <div class="controls">
+                    <div id="div_vn_afc">
+              <script type="text/javascript">
+                    var oFCKeditor = new FCKeditor('content');
+                    oFCKeditor.BasePath = "<?php echo $this->baseUrl(); ?>/fckeditor/";
+                    oFCKeditor.Width	= 600 ;
+                    oFCKeditor.Height	= 300 ;
+                    oFCKeditor.Value="<?php echo $content; ?>";
+                    oFCKeditor.Config["EnterMode"]		= "br" ;
+                    oFCKeditor.Create();
+                    document.getElementById('xEnter').value = "br" ;
+                    //document.getElementById("noidung").value=jljl;
+            </script>
+            </div>
+              </div>
+	</div>
+        <div class="form-actions">
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+                  <button type="reset" class="btn">Cancel</button>
+          </div>
+    
+          
+    
+      </form>
+<?php
+    }
+?>
+    </div></div></div>
+<div class="clear"></div>
+<div>
+<ul class="breadcrumb">
+        <li>
+                <a href="<?php echo $this->baseUrl(); ?>/admin/index/">Trang chủ</a> <span class="divider">/</span>
+        </li>
+        <li>
+                <a href="<?php echo $this->baseUrl(); ?>/admin/page/index/">Thêm loại trang</a> <span class="divider">/</span>
+        </li>
+        <li>
+                <a href="<?php echo $this->baseUrl(); ?>/admin/page/listpage/">Danh sách loại trang</a> <span class="divider">/</span>
+        </li>
+<!--         <li>
+                <a href="<?php //echo $this->baseUrl(); ?>/admin/page/addpages/">Thêm trang mới</a> <span class="divider">/</span>
+        </li>
+         <li>
+                <a href="<?php //echo $this->baseUrl(); ?>/admin/page/listpages/">Danh sách  trang</a>
+        </li>-->
+</ul>
+</div>

@@ -1,0 +1,150 @@
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl(); ?>/img/speechbubbles.css" />
+
+<script src="<?php echo $this->baseUrl(); ?>/img/speechbubbles.js">
+
+/***********************************************
+* Speech Bubbles Tooltip- (c) Dynamic Drive (www.dynamicdrive.com)
+* This notice MUST stay intact for legal use
+* Visit http://www.dynamicdrive.com/ for this script and 100s more.
+***********************************************/
+
+</script>
+
+<script type="text/javascript">
+
+jQuery(function($){ //on document.ready
+//Apply tooltip to links with class="addspeech", plus look inside 'speechdata.txt' for the tooltip markups
+$('a.addspeech').speechbubble({url:'<?php echo $this->baseUrl(); ?>/img/speechdata.txt'})
+})
+
+</script>
+
+<div>
+<ul class="breadcrumb">
+        <li>
+                <a href="<?php echo $this->baseUrl(); ?>/admin/index/">Trang chủ</a> <span class="divider">/</span>
+        </li>
+        
+</ul>
+</div>
+
+<div class="row-fluid sortable">
+<div class="box span12">
+    
+    <div class="box-header well" data-original-title>
+						<h2><i class="icon-user"></i> Members</h2>
+						<div class="box-icon">
+							<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+						</div>
+  </div>
+    <div class="box-content">
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+     <th >STT</th>
+  
+        <th >Họ tên</th>
+        <th >Địa chỉ</th>
+    <th >Điện thoại</th>
+    <th >Email</th>
+       
+    
+    <th >Xóa</th>
+    <th >Xem nội dung</th>
+    </thead>
+  </tr>
+  
+  
+  
+      <?php
+      $stt=1;
+      $url=$this->baseUrl();
+      foreach($this->books as $val)
+        {
+          
+          $id=$val['id'];
+           
+           
+            $muser= new Admin_Model_Page();
+       
+           
+         
+          $del=$this->url(array('action'=>'deleteorder','id'=>$id));
+          
+          
+          
+         
+          ?>
+      <tr id="row_<?= $id ?>">
+      <td ><?php echo $stt;?></td>
+   <?php  echo "<td align='center'>".$val['fullname']."</td>"; ?>
+
+      <td> <?php echo $val['address']; ?></td>
+    <td> <?php echo $val['phone']; ?></td>
+    <td><?php echo $val['email']; ?></td>
+    
+   
+    
+    <td>
+    
+       <a class="btn btn-danger"  id="row_del_<?= $id ?>" href='#' >
+	<i class="icon-trash icon-white"></i> 
+	Delete
+	</a>
+    
+    
+    </td>
+    <td >
+        
+      
+               
+            
+        <a href="#" class="addspeech" >View</a>
+                
+
+
+		
+        
+    </td>
+  </tr>
+  <script>
+            $( "#row_del_<?= $id ?>" ).live('click',function(event_ref) {  event_ref.preventDefault();
+           if (confirm('Are you sure you wish to delete this record?')){
+                $.post('<?= $del ?>');
+                $( "#row_<?= $id ?>" ).hide(2000);
+          }
+    });
+</script>
+  <?php $stt++;} ?>
+  
+ 
+  <tr ><td colspan="9">
+          
+      <?php 
+      if($stt>=15) {
+      echo $this->paginationControl($this->books,  'Sliding', 'page/pagination.phtml');}
+      else {}
+      ?>     
+      </td>
+  </tr>
+    
+</table>
+         
+    </div> 
+        
+</div>
+</div>
+
+<div class="clear"></div>
+<div>
+<ul class="breadcrumb">
+        <li>
+                <a href="<?php echo $this->baseUrl(); ?>/admin/index/">Trang chủ</a> <span class="divider">/</span>
+        </li>
+        
+</ul>
+</div>

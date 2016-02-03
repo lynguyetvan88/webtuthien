@@ -1,0 +1,136 @@
+
+
+<script type="text/javascript" src="<?php echo $this->baseurl();  ?>/js/AJAX.js"></script>
+
+<div class="row-fluid sortable">
+<div class="">
+    <div class="box-header well" data-original-title>
+        <h2><i class="icon-user"></i> Đăng tin miễn phí</h2>
+        
+  </div>
+     <div class="box-content">
+<form action="" method="post" enctype="multipart/form-data" name="tt_mh" id="tt_mh" onsubmit="return checkInput();" class="form-horizontal">
+    
+     <div class="control-group">
+                  <label class="control-label" for="typeahead">Tên đầy đủ </label>
+                  <div class="controls">
+                    <input name="full_name" type="text" class="span6 typeahead" id="full_name"  placeholder="Nhập tên của bạn" data-provide="typeahead" data-items="4" data-source='["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]'>
+                    <div class="warning" id="full_nameError">Vui lòng nhập tên của bạn</div>
+                 </div>
+    </div>
+    
+     <div class="control-group">
+                  <label class="control-label" for="typeahead">Username </label>
+                  <div class="controls">
+                      <input name="username" type="text" class="span6 typeahead" id="username" placeholder="Username"  data-provide="typeahead" data-items="4" >
+                      <div class="warning" id="usernameError">Usename ko có khoảng trắng và ko có dấu phải hơn 8 ký tự </div>
+                  </div>
+    </div>
+    
+    
+    
+    
+    <div class="control-group">
+                  <label class="control-label" for="typeahead">Password </label>
+                  <div class="controls">
+                    <input name="password" type="password"  class="span6 typeahead" id="password"  >
+                    <div class="warning" id="passwordError">Pass ko có khoảng trắng và ko có dấu phải hơn 8 ký tự </div>
+               
+                  </div>
+    </div>
+    
+    <div class="control-group">
+                  <label class="control-label" for="typeahead">Nhập lại Password </label>
+                  <div class="controls">
+                    <input name="re_password" type="password" class="span6 typeahead" id="re_password"  >
+                    
+                    <div class="warning" id="re_passwordError">Vui lòng password của bạn</div>
+                  </div>
+    </div>
+    
+    <div class="control-group">
+                  <label class="control-label" for="typeahead">Email </label>
+                  <div class="controls">
+                      <input name="email" type="text" class="span6 typeahead" id="email"  data-provide="typeahead" placeholder="Email của bạn">
+                    <div class="warning" id="emailError">Vui lòng nhập đúng định dạng email của bạn</div>
+               
+                  </div>
+    </div>
+    
+    <div class="control-group">
+                  <label class="control-label" for="typeahead">Số ĐT </label>
+                  <div class="controls">
+                      <input name="phone" type="text" class="span6 typeahead" id="phone"  data-provide="typeahead"  placeholder="Số điện thoại của bạn">
+                    <div class="warning" id="phoneError">Vui lòng nhập đúng định dạng của bạn</div>
+               
+                  </div>
+    </div>
+    
+    <div class="control-group">
+                  <label class="control-label" for="typeahead">Ngày sinh </label>
+                  <div class="controls">
+                      <input name="birth" type="text" class="span6 typeahead" id="birth" placeholder="Nhập ngày sinh của bạn"  >
+                    <label>Ví dụ: 10/11/1988</label>
+                     <div class="warning" id="birthError">Vui lòng nhập ngày sinh của bạn</div>
+               
+                  </div>
+    </div>
+    
+    <div class="control-group">
+            <label class="control-label">Giới tính</label>
+            <div class="controls">
+              <label class="radio">
+                    <input type="radio" name="sex" id="optionsRadios1" value="1" checked="">
+                    Nam &nbsp;&nbsp;&nbsp;
+              </label>
+             
+              <label class="radio">
+                    <input type="radio" name="sex" id="optionsRadios1" value="2">
+                   Nữ 
+              </label>
+                
+                 <label class="radio">
+                    <input type="radio" name="sex" id="optionsRadios1" value="3">
+                   Gay
+              </label>
+            </div>
+	</div>
+    
+    
+     
+    <div class="control-group">
+                  <label class="control-label" for="typeahead">Địa chỉ </label>
+                  <div class="controls">
+                      <input name="address" type="text" class="span6 typeahead" id="typeahead" placeholder="Nhập địa chỉ của bạn" >
+                    
+               
+                  </div>
+    </div>
+    
+       
+     
+    <div class="control-group">
+                  <label class="control-label" for="typeahead">Captcha </label>
+                  <div class="controls">
+                      <label><?php echo $this->captcha; ?></label>
+                    
+                    
+                      <input name="captcha" type="text" class="span6 typeahead" id="captcha"  placeholder="Nhập ký tự ở trên" >
+                    <?php echo $this->formHidden('captcha_id',$this->captchaID)?>
+                <div class="warning" id="captchaError">Vui lòng nhập captcha</div>
+                <div class="warning" id="captchaFormat">Sai chuỗi  captcha</div>
+                  </div>
+    </div>
+    
+       
+     
+        
+        <div class="form-actions">
+                  <button type="submit" class="btn btn-primary" id="SendMail">Đăng ký</button>
+                  <button type="reset" class="btn">Cancel</button>
+          </div>
+      
+    </form>
+     </div>
+</div></div>
+<div class="clear"></div>

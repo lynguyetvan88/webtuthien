@@ -1,0 +1,40 @@
+  <?php  $foo = new Default_Model_page; 
+            $avd = $foo->page_3(90);
+            
+            if($avd[0]['active']==1){
+  ?>
+              
+<div class="advertise">
+    <?php echo $avd[0]['content']; ?>
+</div>
+
+            <?php } ?>
+
+
+<script>
+            var windowWidth = $(window).width(); //retrieve current window width
+var windowHeight = $("header").height(); //retrieve current window height
+var documentWidth = $(document).width(); //retrieve current document width
+var documentHeight = $(document).height(); //retrieve current document height
+var vScrollPosition = $(document).scrollTop(); //retrieve the document scroll ToP position
+var hScrollPosition = $(document).scrollLeft(); //retrieve the document scroll Left position
+var left = (windowWidth - 1000)/2-140;
+if(windowWidth>1100){
+$(".advertise").css("left",left+"px");
+} else{$(".advertise").css("display","none");}
+$( document ).ready(function() {
+ 
+ var nav = $('header');
+	var position = $('header').position().top;
+        
+	$(window).scroll(function () {
+		if ($(this).scrollTop() > position) {
+                    $(".advertise").css("top","10px");
+		} else {
+			$(".advertise").css("top","110px");
+		}
+	});
+ 
+});
+           
+        </script>
